@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import { Button, ThemeProvider, Input } from "uru-ui";
+import { Button, ThemeProvider, Input, InputNumber } from "uru-ui";
 
 const theme = {
   padding: "10px 30px",
@@ -42,7 +42,8 @@ export default class App extends Component {
         </div>
         <div>
           <h2>Number Input</h2>
-          <Input />
+          <Input type="number" placeholder="number input" />
+          <InputNumber></InputNumber>
         </div>
       </React.Fragment>
     );
