@@ -8,24 +8,42 @@ const theme = {
   margin: "5px",
   border: "solid 2px green",
   color: "white",
-  backgroundColor: "green"
+  backgroundColor: "#ccc"
 };
 
 export default class App extends Component {
   render() {
     return (
       <React.Fragment>
-        <ThemeProvider theme={theme}>
-          <Button>Custom</Button>
-        </ThemeProvider>
-        <Button color="primary">Danger Button</Button>
-        <Button outlined color="danger">
-          Danger Button
-        </Button>
-        <Button outlined color="success">
-          Danger Button
-        </Button>
-        <Button outlined>Danger Button</Button>
+        <div>
+          <h2>Botones</h2>
+          <ThemeProvider theme={theme}>
+            <Button>Custom Button</Button>
+          </ThemeProvider>
+          <Button color="primary">Primary Button</Button>
+          <Button color="danger">Danger Button</Button>
+          <Button outlined color="success">
+            Success outlined Button
+          </Button>
+          <Button outlined>Default outlined Button</Button>
+        </div>
+        <div>
+          <h2>Inputs</h2>
+          <ThemeProvider theme={theme}>
+            <Input placeholder="custom Input" />
+          </ThemeProvider>
+          <Input
+            color="success"
+            placeholder="filled success"
+            variant="filled"
+          />
+          <Input placeholder="outlined primary" variant="outlined" />
+          <Input color="danger" placeholder="Default danger" />
+        </div>
+        <div>
+          <h2>Number Input</h2>
+          <Input />
+        </div>
       </React.Fragment>
     );
   }

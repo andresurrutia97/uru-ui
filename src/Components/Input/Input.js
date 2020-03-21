@@ -1,59 +1,98 @@
-import React from "react";
-import styles from "./Input.module.css";
+/** @jsx jsx */
+import { jsx } from "@emotion/core";
 import { ThemeContext } from "../ThemeProvider/ThemeProvider";
 import { colors } from "../Colors/Colors";
 
-export const Input = props => {
-  let classes = [styles.btn];
-
-  const baseTheme = ({ button }) => {
-    classes = [styles.btn, styles.btnWTheme];
-    return {
-      backgroundColor: button.backgroundColor,
-      borderColor: button.borderColor,
-      color: button.color,
-      fontSize: button.fontSize,
-      padding: "7px 15px",
-      borderRadius: "8px",
-      margin: "5px",
-      border: "none"
-    };
-  };
+const Button = props => {
+  const customTheme = theme => ({
+    ...theme
+  });
 
   const variants = () => {
-    const baseButton = {
-      padding: "7px 15px",
-      fontSize: "16px",
-      color: "white",
-      margin: "5px"
-    };
-    switch (props.variant) {
-      case "standard":
-        classes = [styles.btn, styles.btnPrimary];
-        return {
-          borderBottom: "solid 1px",
-          borderColor: colors.primary,
+    let colorInput = props.color ? colors[props.color] : colors.primary;
 
-          ...baseButton
+    const baseInput = {
+      boxSizing: "border-box",
+      padding: "10px 20px",
+      fontSize: "16px",
+      margin: "5px",
+      outline: "none"
+    };
+
+    switch (props.variant) {
+      case "filled":
+        let variantFilled = {
+          border: "none",
+          backgroundColor: colors.gray,
+          borderBottom: "solid 1px",
+          borderRadius: "5px 5px 0 0",
+          borderColor: colorInput,
+          transition: "border-width 0.05s",
+          ":hover": {
+            borderBottom: "solid 2px",
+            borderColor: colorInput
+          },
+          ":focus": {
+            borderBottom: "solid 2px",
+            borderColor: colorInput
+          }
         };
-      case "danger":
-        classes = [styles.btn, styles.btnDanger];
+
         return {
-          backgroundColor: colors.danger,
-          ...baseButton
+          ...variantFilled,
+          ...baseInput
         };
-      case "success":
-        classes = [styles.btn, styles.btnSuccess];
+      case "outlined":
+        let varianOutlined = {
+          border: "none",
+          backgroundColor: "white",
+          border: "solid 1px",
+          borderRadius: "5px",
+          borderColor: colorInput,
+          transition: "border-width 0.05s",
+          ":hover": {
+            border: "solid 2px",
+            borderColor: colorInput
+          },
+          ":focus": {
+            border: "solid 2px",
+            borderColor: colorInput
+          }
+        };
+
         return {
-          backgroundColor: colors.success,
-          ...baseButton
+          ...varianOutlined,
+          ...baseInput
         };
       default:
-        classes = [styles.btn, styles.btnDefault];
-        return {
-          backgroundColor: colors.default,
-          ...baseButton
+        let variantDefault = {
+          border: "none",
+          backgroundColor: "white",
+          borderBottom: "solid 1px",
+          borderRadius: "5px 5px 0 0",
+          borderColor: colorInput,
+          transition: "border-width 0.05s",
+          ":hover": {
+            borderBottom: "solid 2px",
+            borderColor: colorInput
+          },
+          ":focus": {
+            borderBottom: "solid 2px",
+            borderColor: colorInput
+          }
         };
+
+        return {
+          ...variantDefault,
+          ...baseInput
+        };
+    }
+  };
+
+  const css = theme => {
+    if (theme) return customTheme(theme);
+    else {
+      return variants();
     }
   };
 
@@ -61,10 +100,14 @@ export const Input = props => {
     <ThemeContext.Consumer>
       {theme => (
         <input
-          style={theme ? baseTheme(theme) : variants()}
-          className={classes.join(" ")}
-        ></input>
+          {...props}
+          placeholder={props.placeholder}
+          value={props.value}
+          css={css(theme)}
+        />
       )}
     </ThemeContext.Consumer>
   );
 };
+
+export default Button;
