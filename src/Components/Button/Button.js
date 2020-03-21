@@ -4,7 +4,7 @@ import { ThemeContext } from "../ThemeProvider/ThemeProvider";
 import { colors } from "../Colors/Colors";
 
 const Button = props => {
-  const baseTheme = theme => ({
+  const customTheme = theme => ({
     ...theme
   });
 
@@ -123,14 +123,7 @@ const Button = props => {
   };
 
   const css = theme => {
-    if (theme) return baseTheme(theme);
-    else {
-      return variants();
-    }
-  };
-
-  const outlined = theme => {
-    if (theme) return baseTheme(theme);
+    if (theme) return customTheme(theme);
     else {
       return variants();
     }
@@ -138,7 +131,11 @@ const Button = props => {
 
   return (
     <ThemeContext.Consumer>
-      {theme => <button css={css(theme)}>{props.children}</button>}
+      {theme => (
+        <button {...props} css={css(theme)}>
+          {props.children}
+        </button>
+      )}
     </ThemeContext.Consumer>
   );
 };
