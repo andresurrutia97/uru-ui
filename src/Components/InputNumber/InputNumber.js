@@ -1,7 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
+import Input from "../Input/Input";
 
-class NumberField extends React.Component {
+class InputNumber extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -12,7 +13,6 @@ class NumberField extends React.Component {
   onChange = event => {
     const input = event.target.value;
     const onlyNumbers = input.replace(/[\D\s\._\-]+/g, "");
-
     this.setState({ number: this.formatNumber(onlyNumbers) });
   };
 
@@ -25,19 +25,18 @@ class NumberField extends React.Component {
   render() {
     return (
       <div>
-        <input
+        <Input
+          {...this.props}
           value={this.state.number}
           onChange={event => this.onChange(event)}
-        />
+        ></Input>
       </div>
     );
   }
 }
 
-// NumberField.propTypes = {
-//   name: PropTypes.string,
-//   value: PropTypes.string,
-//   onChange: PropTypes.func
-// };
+InputNumber.propTypes = {
+  number: PropTypes.string,
+};
 
-export default NumberField;
+export default InputNumber;

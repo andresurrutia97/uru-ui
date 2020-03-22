@@ -1,5 +1,7 @@
 /** @jsx jsx */
 import { jsx } from "@emotion/core";
+import PropTypes from "prop-types";
+
 import { ThemeContext } from "../ThemeProvider/ThemeProvider";
 import { colors } from "../Colors/Colors";
 
@@ -29,7 +31,7 @@ const Button = props => {
     switch (props.color) {
       case "primary":
         let variantPrimary = {};
-        props.outlined
+        props.outlined 
           ? (variantPrimary = {
               borderColor: colors.primary,
               color: colors.primary,
@@ -138,6 +140,11 @@ const Button = props => {
       )}
     </ThemeContext.Consumer>
   );
+};
+
+Button.propTypes = {
+  outlined: PropTypes.bool,
+  colors: PropTypes.string
 };
 
 export default Button;
