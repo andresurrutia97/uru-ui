@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import { Button, ThemeProvider, Input, InputNumber } from "uru-ui";
+import { Button, ThemeProvider, Input, InputNumber, Select } from "uru-ui";
 
 const theme = {
   padding: "10px 30px",
@@ -11,8 +11,24 @@ const theme = {
   backgroundColor: "#ccc"
 };
 
+const options = [
+  { id: "1", label: "Perro" },
+  { id: "2", label: "gato" },
+  { id: "3", label: "leon" },
+  { id: "4", label: "culebra" }
+];
+
 export default class App extends Component {
+
   render() {
+    const selectedOptionsStyles = {
+      color: "#3c763d",
+      backgroundColor: "#dff0d8"
+    };
+    const optionsListStyles = {
+      backgroundColor: "#fcf8e3",
+      color: "#8a6d3b"
+    };
     return (
       <React.Fragment>
         <div>
@@ -42,8 +58,16 @@ export default class App extends Component {
         </div>
         <div>
           <h2>Number Input</h2>
-          <Input type="number" placeholder="number input" />
-          <InputNumber></InputNumber>
+          <InputNumber placeholder="numeros" variant="outlined"></InputNumber>
+        </div>
+        <div>
+          <h2>Multiple selecte</h2>
+          <Select
+            options={options}
+            selectedOptionsStyles={selectedOptionsStyles}
+            optionsListStyles={optionsListStyles}
+            isSingleSelect={false}
+          ></Select>
         </div>
       </React.Fragment>
     );
