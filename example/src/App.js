@@ -10,6 +10,22 @@ const theme = {
   color: "white",
   backgroundColor: "#ccc"
 };
+const themeSelect = {
+  root: {
+    borderWidth: "3px",
+    borderRadius: "0 50px 50px 0",
+    borderColor: "blue",
+    [":hover"]: { borderColor: "green", borderWidth: "3px" },
+    [":focus"]: { borderColor: "black", borderWidth: "3px" }
+  },
+  selectedOptionItem: { color: "red" },
+  selectedOptionsPills: {
+    backgroundColor: "#a3e4be"
+  },
+  placeholder: {
+    color: "#c934ce"
+  }
+};
 
 const options = [
   { label: "Perro" },
@@ -57,6 +73,13 @@ export default class App extends Component {
         <div>
           <h2>Multiple select</h2>
           <Select options={options} multi></Select>
+          <ThemeProvider theme={themeSelect}>
+            <Select
+              options={options}
+              multi
+              placeholder="Custom select..."
+            ></Select>
+          </ThemeProvider>
         </div>
       </React.Fragment>
     );
