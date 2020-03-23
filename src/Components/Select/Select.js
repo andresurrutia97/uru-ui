@@ -6,11 +6,13 @@ import React from "react";
 import SelectedItemList from "./SelectedItemsList/SelectedItemList";
 import OptionList from "./OptionList/OptionList";
 
+import { arrowUp, arrowDown } from "../../Assets/icons/arrows";
+
 class Select extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      dropDownClicked: false,
+      dropDownOpen: false,
       options: [],
       selectedOptions: []
     };
@@ -24,50 +26,63 @@ class Select extends React.Component {
     this.setState({ options: options });
   }
 
-  optionsOnchange = (index, value) => {
-    let dd = this.props.options;
-    // for single select options
-    if (this.props.isSingleSelect === true) {
-      dd.map(option => {
-        option.value = false;
+  optionSelectedHandler = (index, selected) => {
+    let options = [...this.state.options];
+    // Selección única
+    if (!this.props.multi) {
+      options.map(option => {
+        option.selected = false;
       });
     }
-    dd[index].value = value;
-    this.setState({ selectedOptions: dd, dropDownClicked: true });
+    options[index].selected = selected;
+    this.setState({ selectedOptions: options });
   };
 
-  selectedOptionsClick = id => {
-    let filteredToasts = this.state.selectedOptions;
-    filteredToasts.map(obj => {
-      if (obj.id === id) {
-        obj.value = false;
+  removeSelectionHandler = id => {
+    let selectedOptions = [...this.state.selectedOptions];
+    selectedOptions.map(option => {
+      if (option.id === id) {
+        option.selected = false;
       }
     });
-    this.setState({ selectedOptions: filteredToasts });
+
+    this.setState({ selectedOptions: selectedOptions, dropDownOpen: true });
   };
 
-  closeDropDown = () => {
-    this.setState({ dropDownClicked: false });
+  closeDropDownHandler = () => {
+    this.setState({ dropDownOpen: false });
   };
 
-  openDropDown = () => {
-    this.setState({ dropDownClicked: true });
+  openDropDownHandler = () => {
+    this.setState({ dropDownOpen: true });
   };
+
+  color = this.props.color ? colors[this.props.color] : colors.primary;
 
   styles = {
     root: {
       boxSizing: "border-box",
       margin: "5px",
       position: "relative",
-      backgroundColor: "#fff",
+      backgroundColor: "white",
       width: "fit-content",
-      outline: "none"
+      outline: "none",
+      border: "solid 1px",
+      borderColor: colors.darkGray,
+      borderRadius: "4px",
+      ":hover": {
+        borderWidth: "2px",
+        borderColor: this.color
+      },
+      ":focus": {
+        borderWidth: "2px",
+        borderColor: this.color
+      }
     },
     optionsList: {
-      height: "150px",
+      maxHeight: "150px",
       overflowY: "auto",
-      Zindex: "10001",
-      backgroundColor: "#fff",
+      backgroundColor: "white",
       position: "absolute",
       border: "1px solid #ccc",
       borderRadius: "4px",
@@ -75,7 +90,6 @@ class Select extends React.Component {
       display: "none",
       boxShadow: "0px 2px 3px rgba(0, 0, 0, 0.2)",
       marginTop: "5px",
-      padding: "0",
       padding: "5px 0 5px 0"
     },
     optionItem: {
@@ -85,50 +99,42 @@ class Select extends React.Component {
       padding: "5px 20px"
     },
     selectedOptionItem: {
-      color: colors.primary
+      color: this.color
     },
     selectedOptions: {
-      height: "30px",
-      verticalAlign: "middle",
+      minHeight: "30px",
       display: "flex",
       alignItems: "center",
-      border: "solid 1px #ccc",
-      borderRadius: "4px",
       width: "500px",
-      padding: "5px 20px"
+      padding: "5px 5px"
     },
     icon: {
       right: "0",
-      display: "inline-block",
       cursor: "pointer",
-      fontSize: "12px",
-      width: "10px",
-      cursor: "pointer"
+      fill: colors.darkGray,
+      display: "flex",
+      alignItems: "center"
     },
-    selectedOptionsBadgesList: {
-      fontWeight: " 400",
-      margin: "0",
-      textAlign: "left",
-      verticalAlign: "middle",
-      display: "inline-block",
-      width: "calc(100% - 20px)",
-      whiteSpace: "nowrap",
-      textOverflow: "clip",
-      overflow: "hidden"
+    selectedOptionsPillsList: {
+      width: "100%"
     },
-    selectedOptionsBadges: {
+    selectedOptionsPills: {
       fontSize: "14px",
-      borderRadius: "2px",
+      borderRadius: "4px",
       padding: "2px 10px",
-      margin: "0 5px 0 0",
+      margin: "3px 5px",
       border: "solid 1px #ddd",
       display: "inline-block",
       ":after": {
         content: '"×"',
         cursor: "pointer",
-        marginLeft: "5px",
+        marginLeft: "7px",
         verticalAlign: "middle"
       }
+    },
+    placeholder: {
+      color: "#ccc",
+      marginLeft: "10px"
     }
   };
 
@@ -136,25 +142,33 @@ class Select extends React.Component {
     return (
       <div
         css={this.styles.root}
-        onBlur={this.closeDropDown}
-        onClick={() => {
-          this.setState({ dropDownClicked: !this.state.dropDownClicked });
-        }}
+        onBlur={this.closeDropDownHandler}
+        tabIndex="0"
       >
-        <div css={this.styles.selectedOptions}>
+        <div
+          css={this.styles.selectedOptions}
+          onClick={() => {
+            this.setState(prevState => {
+              return { dropDownOpen: !prevState.dropDownOpen };
+            });
+          }}
+        >
           <SelectedItemList
             items={this.state.selectedOptions}
-            deselectItem={this.selectedOptionsClick}
+            deselectItem={this.removeSelectionHandler}
+            placeholder={this.props.placeholder}
             //estilos
             styles={this.styles}
           />
-          <div css={this.styles.icon}>&#9660;</div>
+          <div css={this.styles.icon}>
+            {!this.state.dropDownOpen ? arrowDown : arrowUp}
+          </div>
         </div>
 
         <OptionList
-          options={this.props.options}
-          open={this.state.dropDownClicked}
-          optionsOnchange={this.optionsOnchange}
+          options={this.state.options}
+          open={this.state.dropDownOpen}
+          optionSelected={this.optionSelectedHandler}
           //estilos
           styles={this.styles}
         />

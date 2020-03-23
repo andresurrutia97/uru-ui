@@ -12,23 +12,17 @@ const theme = {
 };
 
 const options = [
-  { id: "1", label: "Perro" },
-  { id: "2", label: "gato" },
-  { id: "3", label: "leon" },
-  { id: "4", label: "culebra" }
+  { label: "Perro" },
+  { label: "gato" },
+  { label: "leon" },
+  { label: "culebra" },
+  { label: "pez" },
+  { label: "tigre" },
+  { label: "aguila" }
 ];
 
 export default class App extends Component {
-
   render() {
-    const selectedOptionsStyles = {
-      color: "#3c763d",
-      backgroundColor: "#dff0d8"
-    };
-    const optionsListStyles = {
-      backgroundColor: "#fcf8e3",
-      color: "#8a6d3b"
-    };
     return (
       <React.Fragment>
         <div>
@@ -61,13 +55,8 @@ export default class App extends Component {
           <InputNumber placeholder="numeros" variant="outlined"></InputNumber>
         </div>
         <div>
-          <h2>Multiple selecte</h2>
-          <Select
-            options={options}
-            selectedOptionsStyles={selectedOptionsStyles}
-            optionsListStyles={optionsListStyles}
-            isSingleSelect={false}
-          ></Select>
+          <h2>Multiple select</h2>
+          <Select options={options} multi></Select>
         </div>
       </React.Fragment>
     );

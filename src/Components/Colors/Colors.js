@@ -7,5 +7,6 @@ export const colors = {
   successDark: "#49ac35",
   default: "#b4b4b4",
   defaultDark: "#999999",
-  gray: "#e9e9e9"
+  gray: "#e9e9e9",
+  darkGray: "#adadad"
 };

@@ -6,8 +6,8 @@ const OptionList = props => {
   const styles = { ...props.styles.optionsList, ...show };
   return (
     <ul css={styles}>
-      {props.options.map((el, i) => {
-        const selectedItem = el.value
+      {props.options.map((el) => {
+        const selectedItem = el.selected
           ? { ...props.styles.selectedOptionItem }
           : {};
         return (
@@ -15,9 +15,9 @@ const OptionList = props => {
             css={props.styles.optionItem}
             style={selectedItem}
             key={el.id}
-            onClick={() => props.optionsOnchange(i, !el.value)}
+            onClick={() => props.optionSelected(el.id, !el.selected)}
           >
-            {el.label}
+            {el.label} 
           </li>
         );
       })}
