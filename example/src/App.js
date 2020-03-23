@@ -1,6 +1,13 @@
 import React, { Component } from "react";
 
-import { Button, ThemeProvider, Input, InputNumber, Select } from "uru-ui";
+import {
+  Button,
+  ThemeProvider,
+  Input,
+  InputNumber,
+  Select,
+  Autocomplete
+} from "uru-ui";
 
 const theme = {
   padding: "10px 30px",
@@ -15,8 +22,8 @@ const themeSelect = {
     borderWidth: "3px",
     borderRadius: "0 50px 50px 0",
     borderColor: "blue",
-    [":hover"]: { borderColor: "green", borderWidth: "3px" },
-    [":focus"]: { borderColor: "black", borderWidth: "3px" }
+    ":hover": { borderColor: "green", borderWidth: "3px" },
+    ":focus": { borderColor: "black", borderWidth: "3px" }
   },
   selectedOptionItem: { color: "red" },
   selectedOptionsPills: {
@@ -27,7 +34,7 @@ const themeSelect = {
   }
 };
 
-const options = [
+const optionsSelect = [
   { label: "Perro" },
   { label: "gato" },
   { label: "leon" },
@@ -35,6 +42,16 @@ const options = [
   { label: "pez" },
   { label: "tigre" },
   { label: "aguila" }
+];
+
+const autocomplete = [
+  "perro",
+  "gato",
+  "leon",
+  "culebra",
+  "pez",
+  "tigre",
+  "aguila"
 ];
 
 export default class App extends Component {
@@ -72,14 +89,18 @@ export default class App extends Component {
         </div>
         <div>
           <h2>Multiple select</h2>
-          <Select options={options} multi></Select>
+          <Select options={optionsSelect} multi></Select>
           <ThemeProvider theme={themeSelect}>
             <Select
-              options={options}
+              options={optionsSelect}
               multi
               placeholder="Custom select..."
             ></Select>
           </ThemeProvider>
+        </div>
+        <div>
+          <h2>Autocomplete</h2>
+          <Autocomplete options={autocomplete}></Autocomplete>
         </div>
       </React.Fragment>
     );
