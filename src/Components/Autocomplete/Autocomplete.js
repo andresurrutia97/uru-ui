@@ -1,83 +1,123 @@
-import React, { Component, Fragment } from "react";
+/** @jsx jsx */
+import { jsx } from "@emotion/core";
+import { Component, Fragment } from "react";
+import { ThemeContext } from "../ThemeProvider/ThemeProvider";
+import { colors } from "../Colors/Colors";
+import Input from "../Input/Input";
 
 class Autocomplete extends Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = {
-      // The active selection's index
-      activeSuggestion: 0,
-      // The suggestions that match the user's input
-      filteredSuggestions: [],
-      // Whether or not the suggestion list is shown
-      showSuggestions: false,
-      // What the user has entered
-      userInput: ""
+      suggestions: [],
+      showDropdown: false,
+      inputText: ""
     };
   }
 
   onChange = event => {
-    const suggestions = this.props.options;
-    const userInput = event.currentTarget.value;
+    const options = this.props.options;
+    const inputText = event.target.value;
 
-    // // Filter our suggestions that don't contain the user's input
-    const filteredSuggestions = suggestions.filter(
+    //Filtra las opciones que hacen match con se ingresa en el input
+    const suggestions = options.filter(
       suggestion =>
-        (suggestion.toLowerCase().indexOf(userInput.toLowerCase()) > -1)
+        suggestion.toLowerCase().indexOf(inputText.toLowerCase()) > -1
     );
 
     this.setState({
-      activeSuggestion: 0,
-      filteredSuggestions,
-      showSuggestions: true,
-      userInput: event.currentTarget.value
+      suggestions,
+      showDropdown: true,
+      inputText: event.currentTarget.value
     });
   };
 
-  onClick = event => {
+  selectItemHandler = event => {
     this.setState({
-      activeSuggestion: 0,
-      filteredSuggestions: [],
-      showSuggestions: false,
-      userInput: event.currentTarget.innerText
+      suggestions: [],
+      showDropdown: false,
+      inputText: event.target.innerText
     });
   };
 
-  render() {
+  styles = theme => {
+    return {
+      Root: {
+        width: "350px",
+        margin: "5px"
+      },
+      Input: {
+        boxSizing: "unset",
+        width: "inherit",
+        margin: "0"
+      },
+      optionsList: {
+        maxHeight: "150px",
+        zIndex: "1000",
+        overflowY: "auto",
+        backgroundColor: "white",
+        border: "1px solid #ccc",
+        borderRadius: "4px",
+        width: "100%",
+        boxShadow: "0px 2px 3px rgba(0, 0, 0, 0.2)",
+        marginTop: "5px",
+        padding: "5px 20px",
+        listStyle: "none"
+      },
+      optionItem: {
+        fontSize: "16px",
+        cursor: "default",
+        margin: "5px 0"
+      }
+    };
+  };
+
+  optionList = theme => {
     let suggestionsListComponent;
 
-    if (this.state.showSuggestions && this.state.userInput) {
-      if (this.state.filteredSuggestions.length) {
-        suggestionsListComponent = (
-          <ul>
-            {this.state.filteredSuggestions.map(suggestion => {
+    if (this.state.showDropdown && this.state.inputText) {
+      if (this.state.suggestions.length) {
+        return (suggestionsListComponent = (
+          <ul css={this.styles(theme).optionsList}>
+            {this.state.suggestions.map(suggestion => {
               return (
-                <li key={suggestion} onClick={event => this.onClick(event)}>
+                <li
+                  key={suggestion}
+                  onClick={event => this.selectItemHandler(event)}
+                  css={this.styles(theme).optionItem}
+                >
                   {suggestion}
                 </li>
               );
             })}
           </ul>
-        );
+        ));
       } else {
-        suggestionsListComponent = (
+        return (suggestionsListComponent = (
           <div>
-            <ul>
-              <em>No suggestions, you're on your own!</em>
-            </ul>
+            <span>No hay sugerencias</span>
           </div>
-        );
+        ));
       }
     }
+  };
 
+  render() {
     return (
-      <Fragment>
-        <input
-          type="text"
-          onChange={event => this.onChange(event)}
-          value={this.state.userInput}
-        />
-        {suggestionsListComponent}
-      </Fragment>
+      <ThemeContext.Consumer>
+        {theme => (
+          <div css={this.styles(theme).Root}>
+            <Input
+              variant={"filled"}
+              css={this.styles(theme).Input}
+              type="text"
+              onChange={event => this.onChange(event)}
+              value={this.state.inputText}
+            />
+            {this.optionList(theme)}
+          </div>
+        )}
+      </ThemeContext.Consumer>
     );
   }
 }
