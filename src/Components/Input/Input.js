@@ -4,22 +4,31 @@ import { ThemeContext } from "../ThemeProvider/ThemeProvider";
 import { colors } from "../Colors/Colors";
 
 const Button = props => {
-  const customTheme = theme => ({
-    ...theme
-  });
-
-  const variants = () => {
+  //Función que retorna los estilos del componente
+  const styles = theme => {
+    //Verifica si hay props de color. En caso de no haber, asigna uno por default
     let colorInput = props.color ? colors[props.color] : colors.primary;
 
+    //Verifica si hay estilos Custom y crea variables
+    var customTheme = theme;
+    if (theme) {
+      //Se crea variable especifica para los Selectores (para no sobreescribir los estilos Default)
+      var customThemeHover = theme[":hover"];
+      var customThemeFocus = theme[":focus"];
+    }
+
+    //Estilos base del Input
     const baseInput = {
       boxSizing: "border-box",
-      padding: "10px 20px",
+      padding: "10px 15px",
       fontSize: "16px",
       margin: "5px",
       outline: "none"
     };
 
+    //Switch case para asignar estilos dependiendo de la variante
     switch (props.variant) {
+      //Case para variante "filled"
       case "filled":
         let variantFilled = {
           border: "none",
@@ -30,18 +39,21 @@ const Button = props => {
           transition: "border-width 0.05s",
           ":hover": {
             borderBottom: "solid 2px",
-            borderColor: colorInput
+            borderColor: colorInput,
+            ...customThemeHover
           },
           ":focus": {
             borderBottom: "solid 2px",
-            borderColor: colorInput
+            borderColor: colorInput,
+            ...customThemeFocus
           }
         };
-
         return {
           ...variantFilled,
-          ...baseInput
+          ...baseInput,
+          ...customTheme
         };
+      //Case para variante "outlined"
       case "outlined":
         let varianOutlined = {
           border: "none",
@@ -52,18 +64,21 @@ const Button = props => {
           transition: "border-width 0.05s",
           ":hover": {
             border: "solid 2px",
-            borderColor: colorInput
+            borderColor: colorInput,
+            ...customThemeHover
           },
           ":focus": {
             border: "solid 2px",
-            borderColor: colorInput
+            borderColor: colorInput,
+            ...customThemeFocus
           }
         };
-
         return {
           ...varianOutlined,
-          ...baseInput
+          ...baseInput,
+          ...customTheme
         };
+      //Case para variante por default
       default:
         let variantDefault = {
           border: "none",
@@ -74,25 +89,20 @@ const Button = props => {
           transition: "border-width 0.05s",
           ":hover": {
             borderBottom: "solid 2px",
-            borderColor: colorInput
+            borderColor: colorInput,
+            ...customThemeHover
           },
           ":focus": {
             borderBottom: "solid 2px",
-            borderColor: colorInput
+            borderColor: colorInput,
+            ...customThemeFocus
           }
         };
-
         return {
           ...variantDefault,
-          ...baseInput
+          ...baseInput,
+          ...customTheme
         };
-    }
-  };
-
-  const css = theme => {
-    if (theme) return customTheme(theme);
-    else {
-      return variants();
     }
   };
 
@@ -103,7 +113,7 @@ const Button = props => {
           {...props}
           placeholder={props.placeholder}
           value={props.value}
-          css={css(theme)}
+          css={styles(theme)}
         />
       )}
     </ThemeContext.Consumer>

@@ -12,23 +12,30 @@ class Select extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      //Flag para abrir o cerrar el dropDown
       dropDownOpen: false,
+      //Opciones de selección
       options: [],
+      //Opciones seleccionadas
       selectedOptions: []
     };
   }
 
   componentDidMount() {
     const options = [];
+    /* Recibe las opciones y crea un nuevo arreglo con un id en cada item de 
+    acuerdo al index del arreglo y lo adigna al variable "options" del estado */
     this.props.options.map((el, index) => {
       options.push({ label: el.label, id: index });
     });
     this.setState({ options: options });
   }
 
+  /* Función que asigna un flag booleano a cada item del arreglo para verificar si 
+  ha sido seleccionado o no, creando un nuevo arreglo de opciones seleccionadas */
   optionSelectedHandler = (id, selected) => {
     let options = [...this.state.options];
-    // Selección única
+    //verifica si la selección es única
     if (!this.props.multi) {
       options.map(option => {
         option.selected = false;
@@ -38,6 +45,8 @@ class Select extends React.Component {
     this.setState({ selectedOptions: options });
   };
 
+  /* Función modifica el flag booleano de cada item del arreglo para 
+  deseleccionar el item */
   removeSelectionHandler = id => {
     let selectedOptions = [...this.state.selectedOptions];
     selectedOptions.map(option => {
@@ -49,22 +58,26 @@ class Select extends React.Component {
     this.setState({ selectedOptions: selectedOptions, dropDownOpen: true });
   };
 
+  // Función que se encarga de cerrar el dropDown
   closeDropDownHandler = () => {
     this.setState({ dropDownOpen: false });
   };
 
+  // Función que se encarga de abrir el dropDown
   openDropDownHandler = () => {
     this.setState({ dropDownOpen: true });
   };
 
+  // Verifica si hay props de color. En caso de no haber, asigna uno por default
   color = this.props.color ? colors[this.props.color] : colors.primary;
 
+  //Función que retorna los estilos del componente
   styles = theme => {
-    //custom themes
-
+    //Verifica si hay estilos Custom y crea variables de acuerdo al componente modificado
     if (theme) {
       var rootCustomStyle = theme.root;
       if (theme.root) {
+        //Se crea variable especifica para los Selectores (para no sobreescribir los estilos Default)
         var rootCustomStyleHover = theme.root[":hover"];
         var rootCustomStyleFocus = theme.root[":focus"];
       }
@@ -88,7 +101,7 @@ class Select extends React.Component {
         margin: "5px",
         position: "relative",
         backgroundColor: "white",
-        width: "fit-content",
+        width: "400px",
         outline: "none",
         border: "solid 1px",
         borderColor: colors.darkGray,
@@ -135,12 +148,13 @@ class Select extends React.Component {
         minHeight: "30px",
         display: "flex",
         alignItems: "center",
-        width: "350px",
+        width: "100%",
         padding: "5px 5px",
         ...selectedOptionsCustomStyle
       },
       icon: {
         right: "0",
+        marginRight: "10px",
         cursor: "pointer",
         fill: colors.darkGray,
         display: "flex",
@@ -168,7 +182,7 @@ class Select extends React.Component {
         }
       },
       placeholder: {
-        color: "#ccc",
+        color: "#8e8e8e",
         marginLeft: "10px",
         ...placeholderCustomStyle
       }

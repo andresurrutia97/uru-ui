@@ -9,19 +9,34 @@ import {
   Autocomplete
 } from "uru-ui";
 
-const theme = {
-  padding: "10px 30px",
-  fontSize: "16px",
+const buttonCustomStyle = {
+  padding: "8px",
+  fontSize: "14px",
   margin: "5px",
   border: "solid 2px green",
-  color: "white",
-  backgroundColor: "#ccc"
+  borderRadius: "0 5px 0 5px",
+  ":hover": {
+    borderColor: "black"
+  }
 };
-const themeSelect = {
+
+const inputCustomStyle = {
+  padding: "8px",
+  fontSize: "14px",
+  margin: "5px",
+  border: "dotted 3px",
+  borderColor: "blue",
+  borderRadius: "none",
+  ":hover": {
+    borderColor: "orange"
+  }
+};
+const selectCustomStyle = {
   root: {
     borderWidth: "3px",
     borderRadius: "0 50px 50px 0",
     borderColor: "blue",
+    width: "300px",
     ":hover": { borderColor: "green", borderWidth: "3px" },
     ":focus": { borderColor: "black", borderWidth: "3px" }
   },
@@ -31,6 +46,20 @@ const themeSelect = {
   },
   placeholder: {
     color: "#c934ce"
+  }
+};
+
+const autocomleteCustomStyle = {
+  root: { width: "300px" },
+  input: {
+    padding: "8px",
+    fontSize: "14px",
+    borderStyle: " dotted dashed double solid",
+    borderWidth: " 3px",
+    borderRadius: "none",
+    ":hover": {
+      borderColor: "red"
+    }
   }
 };
 
@@ -52,11 +81,10 @@ const autocomplete = [
   "pez",
   "tigre",
   "aguila",
-  "arroz",
-  "agua",
-  "alcohol",
-  "asdf",
-  "aprinchi"
+  "arroz"
+  // "agua",
+  // "alcohol",
+  // "aprinchi"
 ];
 
 export default class App extends Component {
@@ -65,20 +93,20 @@ export default class App extends Component {
       <React.Fragment>
         <div>
           <h2>Botones</h2>
-          <ThemeProvider theme={theme}>
-            <Button>Custom Button</Button>
+          <ThemeProvider theme={buttonCustomStyle}>
+            <Button color="danger">Custom Button</Button>
           </ThemeProvider>
           <Button color="primary">Primary Button</Button>
           <Button color="danger">Danger Button</Button>
-          <Button outlined color="success">
+          <Button variant="outlined" color="success">
             Success outlined Button
           </Button>
-          <Button outlined>Default outlined Button</Button>
+          <Button variant="outlined">Default outlined Button</Button>
         </div>
         <div>
           <h2>Inputs</h2>
-          <ThemeProvider theme={theme}>
-            <Input placeholder="custom Input" />
+          <ThemeProvider theme={inputCustomStyle}>
+            <Input variant="outlined" placeholder="custom Input" />
           </ThemeProvider>
           <Input
             color="success"
@@ -90,22 +118,41 @@ export default class App extends Component {
         </div>
         <div>
           <h2>Number Input</h2>
-          <InputNumber placeholder="numeros" variant="outlined"></InputNumber>
+          <ThemeProvider theme={inputCustomStyle}>
+            <InputNumber
+              placeholder="Custom number"
+              variant="outlined"
+            ></InputNumber>
+          </ThemeProvider>
+          <InputNumber
+            placeholder="Number Input"
+            variant="outlined"
+          ></InputNumber>
         </div>
         <div>
           <h2>Multiple select</h2>
-          <Select options={optionsSelect} multi></Select>
-          <ThemeProvider theme={themeSelect}>
+          <ThemeProvider theme={selectCustomStyle}>
             <Select
               options={optionsSelect}
               multi
               placeholder="Custom select..."
             ></Select>
           </ThemeProvider>
+          <Select options={optionsSelect} multi></Select>
         </div>
         <div>
           <h2>Autocomplete</h2>
-          <Autocomplete options={autocomplete}></Autocomplete>
+          <ThemeProvider theme={autocomleteCustomStyle}>
+            <Autocomplete
+              variant="outlined"
+              options={autocomplete}
+              placeholder="Type something..."
+            ></Autocomplete>
+          </ThemeProvider>
+          <Autocomplete
+            options={autocomplete}
+            placeholder="Type something..."
+          ></Autocomplete>
         </div>
       </React.Fragment>
     );
