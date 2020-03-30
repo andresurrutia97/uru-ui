@@ -88,6 +88,19 @@ const autocomplete = [
 ];
 
 export default class App extends Component {
+  constructor() {
+    super();
+
+    this.state = {
+      input: ""
+    };
+  }
+
+  onChange = event => {
+    const input = event.target.value;
+    console.log(input);
+    this.setState({ input });
+  };
   render() {
     return (
       <React.Fragment>
@@ -112,6 +125,8 @@ export default class App extends Component {
             color="success"
             placeholder="filled success"
             variant="filled"
+            onChange={this.onChange}
+            value={this.state.input}
           />
           <Input placeholder="outlined primary" variant="outlined" />
           <Input color="danger" placeholder="Default danger" />

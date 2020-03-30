@@ -3,7 +3,7 @@ import { jsx } from "@emotion/core";
 import { ThemeContext } from "../ThemeProvider/ThemeProvider";
 import { colors } from "../Colors/Colors";
 
-const Button = props => {
+const Input = props => {
   //Función que retorna los estilos del componente
   const styles = theme => {
     //Verifica si hay props de color. En caso de no haber, asigna uno por default
@@ -120,4 +120,4 @@ const Button = props => {
   );
 };
 
-export default Button;
+export default Input;
