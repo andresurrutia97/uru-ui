@@ -8,7 +8,7 @@ const SelectedItem = props => {
   /*Función para verificar si hay algún elemento seleccionado y crear un flag y así,
   asignar un placeholder an caso de no haber ninguna item seleccioanda */
   for (let item in props.items) {
-    console.log(props.items);
+    // console.log(props.items);
     if (props.items[item].selected === true) {
       isItemsSelected = true;
     }

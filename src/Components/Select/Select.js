@@ -26,7 +26,7 @@ class Select extends React.Component {
     /* Recibe las opciones y crea un nuevo arreglo con un id en cada item de 
     acuerdo al index del arreglo y lo adigna al variable "options" del estado */
     this.props.options.map((el, index) => {
-      options.push({ label: el.label, id: index });
+      options.push({ label: el.label, id: index, selected: false });
     });
     this.setState({ options: options });
   }
@@ -71,7 +71,7 @@ class Select extends React.Component {
   // Verifica si hay props de color. En caso de no haber, asigna uno por default
   color = this.props.color ? colors[this.props.color] : colors.primary;
 
-  //Función que retorna los estilos del componente
+  //Función que retorna los estilos delz| componente
   styles = theme => {
     //Verifica si hay estilos Custom y crea variables de acuerdo al componente modificado
     if (theme) {
