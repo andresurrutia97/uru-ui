@@ -107,7 +107,12 @@ export default class App extends Component {
         <div>
           <h2>Botones</h2>
           <ThemeProvider theme={buttonCustomStyle}>
-            <Button color="danger">Custom Button</Button>
+            <Button
+              onClick={() => console.log("oprimiste esta mierda")}
+              color="danger"
+            >
+              Custom Button
+            </Button>
           </ThemeProvider>
           <Button color="primary">Primary Button</Button>
           <Button color="danger">Danger Button</Button>

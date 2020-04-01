@@ -30,15 +30,6 @@ describe("<Input/>", () => {
     expect(input).not.toBeNull();
   });
 
-  it("Debe retornar un componente <Input/> con la prop backgroundColor diferente a 'white' ", () => {
-    expect(input.props().children().props.css.backgroundColor).toBe("white");
-
-    input.setProps({ variant: "filled" });
-    expect(input.props().children().props.css.backgroundColor).not.toBe(
-      "white"
-    );
-  });
-
   it("Debe modificar la variable testState de 'test1' a 'test2'  ", () => {
     const testState = { value: "test1" };
 
@@ -54,6 +45,15 @@ describe("<Input/>", () => {
     expect(testState.value).toEqual("test1");
     wrapper.simulate("change", { target: { name: "value", value: "test2" } });
     expect(testState.value).toEqual("test2");
+  });
+
+  it("Debe retornar un componente <Input/> con la prop backgroundColor diferente a 'white' ", () => {
+    expect(input.props().children().props.css.backgroundColor).toBe("white");
+
+    input.setProps({ variant: "filled" });
+    expect(input.props().children().props.css.backgroundColor).not.toBe(
+      "white"
+    );
   });
 
   it("Debe tener estilos custom iguales a los descritos en la constante 'inputCustomStyle'", () => {

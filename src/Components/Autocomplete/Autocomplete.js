@@ -32,7 +32,7 @@ class Autocomplete extends Component {
     this.setState({
       suggestions,
       showDropdown: true,
-      inputText: event.currentTarget.value
+      inputText: event.target.value
     });
   };
 
@@ -41,7 +41,7 @@ class Autocomplete extends Component {
     this.setState({
       suggestions: [],
       showDropdown: false,
-      inputText: event.target.innerText
+      inputText: event
     });
   };
 
@@ -116,7 +116,7 @@ class Autocomplete extends Component {
               return (
                 <li
                   key={suggestion}
-                  onClick={event => this.selectItemHandler(event)}
+                  onClick={() => this.selectItemHandler(suggestion)}
                   css={this.styles(theme).optionItem}
                 >
                   {suggestion}
@@ -142,9 +142,9 @@ class Autocomplete extends Component {
           <div css={this.styles(theme).root}>
             <ThemeProvider theme={this.styles(theme).input}>
               <Input
+                {...this.props}
                 onChange={event => this.onChange(event)}
                 value={this.state.inputText}
-                {...this.props}
               />
               {this.optionList(theme)}
             </ThemeProvider>
