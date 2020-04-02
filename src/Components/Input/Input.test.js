@@ -15,12 +15,8 @@ describe("<Input/>", () => {
   });
 
   const inputCustomStyle = {
-    padding: "8px",
-    fontSize: "14px",
-    margin: "5px",
     border: "dotted 3px",
     borderColor: "blue",
-    borderRadius: "none",
     ":hover": {
       borderColor: "orange"
     }
@@ -30,21 +26,15 @@ describe("<Input/>", () => {
     expect(input).not.toBeNull();
   });
 
-  it("Debe modificar la variable testState de 'test1' a 'test2'  ", () => {
-    const testState = { value: "test1" };
+  it("Debe modificar el value de inputText de '' a 'test' cuando se escriba en el input  ", () => {
+    let inputText = "";
 
     const wrapper = mount(
-      <Input
-        value={testState.value}
-        onChange={e => {
-          testState.value = e.target.value;
-        }}
-      />
+      <Input value={inputText} onChange={e => (inputText = e.target.value)} />
     );
 
-    expect(testState.value).toEqual("test1");
-    wrapper.simulate("change", { target: { name: "value", value: "test2" } });
-    expect(testState.value).toEqual("test2");
+    wrapper.simulate("change", { target: { value: "test" } });
+    expect(inputText).toEqual("test");
   });
 
   it("Debe retornar un componente <Input/> con la prop backgroundColor diferente a 'white' ", () => {
@@ -57,28 +47,21 @@ describe("<Input/>", () => {
   });
 
   it("Debe tener estilos custom iguales a los descritos en la constante 'inputCustomStyle'", () => {
-    const customInputJSX = (
+    const customInput = mount(
       <ThemeProvider theme={inputCustomStyle}>
         <Input />
       </ThemeProvider>
     );
-    const customInput = mount(customInputJSX);
 
-    expect(customInput.props().theme).toEqual({
-      padding: "8px",
-      fontSize: "14px",
-      margin: "5px",
-      border: "dotted 3px",
-      borderColor: "blue",
-      borderRadius: "none",
-      ":hover": {
-        borderColor: "orange"
-      }
+    const wrapperStyle = customInput
+      .find(Input)
+      .children()
+      .props().css;
+
+    expect(wrapperStyle.border).toBe("dotted 3px");
+    expect(wrapperStyle.borderColor).toBe("blue");
+    expect(wrapperStyle[":hover"]).toEqual({
+      borderColor: "orange"
     });
-  });
-
-  it("Debe retornar un componente <Input/> con el placeholder 'testing' ", () => {
-    input.setProps({ placeholder: "testing" });
-    expect(input.props().children().props.placeholder).toBe("testing");
   });
 });

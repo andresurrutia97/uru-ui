@@ -169,7 +169,7 @@ const Button = props => {
 };
 
 Button.propTypes = {
-  outlined: PropTypes.bool,
+  variant: PropTypes.string,
   colors: PropTypes.string
 };
 

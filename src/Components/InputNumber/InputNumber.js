@@ -2,12 +2,11 @@
 import { jsx } from "@emotion/core";
 import React from "react";
 import ThemeProvider, { ThemeContext } from "../ThemeProvider/ThemeProvider";
-import PropTypes from "prop-types";
 import Input from "../Input/Input";
 
 class InputNumber extends React.Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = {
       number: ""
     };
@@ -20,13 +19,13 @@ class InputNumber extends React.Component {
     this.setState({ number: this.formatNumberHandler(input) });
   };
 
-  //Funcion que recibe un numero y lo devuelve formateado
+  //Función que recibe un numero y lo devuelve formateado
   formatNumberHandler = number => {
     //Objeto de javaScript que se encarga de dar formato númerico
     var formatter = new Intl.NumberFormat("en-US");
 
-    //Elimina(reemplaza) cualquier elemento que no sea un número
-    const onlyNumbers = number.replace(/[\D\s\._\-]+/g, "");
+    //Elimina cualquier elemento que no sea un número
+    const onlyNumbers = number.replace(/[^\d-]/g, "");
 
     //Da formato al número
     const formated = formatter.format(onlyNumbers);
@@ -55,9 +54,5 @@ class InputNumber extends React.Component {
     );
   }
 }
-
-InputNumber.propTypes = {
-  number: PropTypes.string
-};
 
 export default InputNumber;

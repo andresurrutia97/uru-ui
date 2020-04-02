@@ -1,18 +1,22 @@
 /** @jsx jsx */
 import { jsx } from "@emotion/core";
+import React from "react";
+import PropTypes from "prop-types";
 import { ThemeContext } from "../ThemeProvider/ThemeProvider";
 import { colors } from "../Colors/Colors";
 
-const Input = props => {
+class Input extends React.Component {
   //Función que retorna los estilos del componente
-  const styles = theme => {
-    //Verifica si hay props de color. En caso de no haber, asigna uno por default
-    let colorInput = props.color ? colors[props.color] : colors.primary;
+  styles = theme => {
+    //Verifica si hay props de color. En caso de no haber, asigna el default
+    let colorInput = this.props.color
+      ? colors[this.props.color]
+      : colors.primary;
 
     //Verifica si hay estilos Custom y crea variables
     var customTheme = theme;
     if (theme) {
-      //Se crea variable especifica para los Selectores (para no sobreescribir los estilos Default)
+      //Se crea variable especifica para los Selectores (para no sobreescribir los estilos default)
       var customThemeHover = theme[":hover"];
       var customThemeFocus = theme[":focus"];
     }
@@ -27,7 +31,7 @@ const Input = props => {
     };
 
     //Switch case para asignar estilos dependiendo de la variante
-    switch (props.variant) {
+    switch (this.props.variant) {
       //Case para variante "filled"
       case "filled":
         let variantFilled = {
@@ -106,18 +110,27 @@ const Input = props => {
     }
   };
 
-  return (
-    <ThemeContext.Consumer>
-      {theme => (
-        <input
-          {...props}
-          placeholder={props.placeholder}
-          value={props.value}
-          css={styles(theme)}
-        />
-      )}
-    </ThemeContext.Consumer>
-  );
+  render() {
+    return (
+      <ThemeContext.Consumer>
+        {theme => (
+          <input
+            {...this.props}
+            placeholder={this.props.placeholder}
+            value={this.props.value}
+            css={this.styles(theme)}
+          />
+        )}
+      </ThemeContext.Consumer>
+    );
+  }
+}
+
+Input.propTypes = {
+  variant: PropTypes.string,
+  colors: PropTypes.string,
+  value: PropTypes.string,
+  placeholder: PropTypes.string
 };
 
 export default Input;

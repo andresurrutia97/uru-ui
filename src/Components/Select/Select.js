@@ -1,6 +1,7 @@
 /** @jsx jsx */
 import { jsx } from "@emotion/core";
 import React from "react";
+import PropTypes from "prop-types";
 
 import { ThemeContext } from "../ThemeProvider/ThemeProvider";
 import { colors } from "../Colors/Colors";
@@ -231,5 +232,12 @@ class Select extends React.Component {
     );
   }
 }
+
+Select.propTypes = {
+  options: PropTypes.array,
+  multi: PropTypes.bool,
+  color: PropTypes.string,
+  placeholder: PropTypes.string
+};
 
 export default Select;

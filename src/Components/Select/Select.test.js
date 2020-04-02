@@ -55,16 +55,14 @@ describe("<Select/>", () => {
     expect(select).not.toBeNull();
   });
 
-  it("Debe retornar las opciones pasadas por props con un id en la variable de state estado options", () => {
+  it("Debe retornar las opciones pasadas por props con una id y un bool en false", () => {
     const auxOptions = [];
 
     optionsSelect.map((el, index) => {
       auxOptions.push({ label: el.label, id: index, selected: false });
     });
 
-    expect(JSON.stringify(select.state().options)).toBe(
-      JSON.stringify(auxOptions)
-    );
+    expect(select.state().options).toEqual(auxOptions);
   });
 
   it("Debe cambiar el estado del dropdownOpen a true al dar click ", () => {
@@ -81,9 +79,7 @@ describe("<Select/>", () => {
   it("Debe retornar true en el elemento selected de la variable 5 del arreglo de opciones ", () => {
     const selectWrapper = mount(<Select options={optionsSelect} multi />);
 
-    expect(JSON.stringify(selectWrapper.state().selectedOptions)).toBe(
-      JSON.stringify([])
-    );
+    expect(selectWrapper.state().selectedOptions).toEqual([]);
 
     funcAuxSelectItem(selectWrapper, 5);
 
@@ -129,30 +125,21 @@ describe("<Select/>", () => {
   });
 
   it("Debe retornar en la prop Theme los estilos custom iguales a los descritos en la constante 'selectCustomStyle'", () => {
-    const customSelectJSX = (
+    const customSelect = mount(
       <ThemeProvider theme={selectCustomStyle}>
         <Select options={optionsSelect} />
       </ThemeProvider>
     );
 
-    const customSelect = mount(customSelectJSX);
+    const wrapperStyle = customSelect
+      .find(Select)
+      .children()
+      .props().css;
 
-    expect(customSelect.props().theme).toEqual({
-      root: {
-        borderWidth: "3px",
-        borderRadius: "0 50px 50px 0",
-        borderColor: "blue",
-        width: "300px",
-        ":hover": { borderColor: "green", borderWidth: "3px" },
-        ":focus": { borderColor: "black", borderWidth: "3px" }
-      },
-      selectedOptionItem: { color: "red" },
-      selectedOptionsPills: {
-        backgroundColor: "#a3e4be"
-      },
-      placeholder: {
-        color: "#c934ce"
-      }
+    expect(wrapperStyle.borderColor).toBe("blue");
+    expect(wrapperStyle[":hover"]).toEqual({
+      borderColor: "green",
+      borderWidth: "3px"
     });
   });
 
