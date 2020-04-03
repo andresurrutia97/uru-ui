@@ -31,10 +31,10 @@ import { Button, InputNumber } from "uru-ui";
 
 function App() {
   return (
-     <>
+    <div>
       <Button color="primary">Click Me</Button>
       <InputNumber/>
-    <>
+    </div>
   );
 }
 
