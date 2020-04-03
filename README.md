@@ -8,7 +8,7 @@
 
 <div align="center"> 
   
-  Libreria de componentes UI para React
+  Librería de componentes UI para React
 
   [![NPM](https://img.shields.io/npm/v/uru-ui.svg)](https://www.npmjs.com/package/uru-ui) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
@@ -18,6 +18,8 @@
 
 ## Install
 
+Uru-UI está disponible como un [npm package](https://www.npmjs.com/package/uru-ui).
+
 ```bash
 npm install --save uru-ui
 ```
@@ -25,16 +27,20 @@ npm install --save uru-ui
 ## Usage
 
 ```jsx
-import { Button, InputNumber } from "uru-ui";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import Button from '@material-ui/core/Button';
 
-const App = () => {
-  return(
-    <>
+function App() {
+  return (
+     <>
       <Button color="primary">Click Me</Button>
       <InputNumber/>
     <>
-  )
+  );
 }
+
+ReactDOM.render(<App />, document.querySelector('#app'));
 ```
 
 ## License
