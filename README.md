@@ -1,29 +1,16 @@
 <p align="center">
-<<<<<<< HEAD
   <a href="">
-=======
-  <a href="http://ant.design">
->>>>>>> f37111225f1caee294c71bb0c05bac2cc1290612
     <img width="300" src="./src/Assets/logoUi.png">
   </a>
 </p>
 
 <h1 align="center">Uru-UI</h1>
 
-<<<<<<< HEAD
-<div align="center">
-> Libreria de componentes UI para React
-=======
 <div align="center"> 
   
   Librería de componentes UI para React
 
   [![NPM](https://img.shields.io/npm/v/uru-ui.svg)](https://www.npmjs.com/package/uru-ui) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
-
-</div>
-
->>>>>>> f37111225f1caee294c71bb0c05bac2cc1290612
-
 
 </div>
 
