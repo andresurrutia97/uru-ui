@@ -83,10 +83,7 @@ const autocomplete = [
   "pez",
   "tigre",
   "aguila",
-  "arroz",
-  // "agua",
-  // "alcohol",
-  // "aprinchi"
+  "arroz"
 ];
 
 export default class App extends Component {
