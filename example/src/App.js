@@ -6,7 +6,7 @@ import {
   Input,
   InputNumber,
   Select,
-  Autocomplete
+  Autocomplete,
 } from "uru-ui";
 
 const buttonCustomStyle = {
@@ -16,20 +16,22 @@ const buttonCustomStyle = {
   border: "solid 2px green",
   borderRadius: "0 5px 0 5px",
   ":hover": {
-    borderColor: "black"
-  }
+    borderColor: "black",
+  },
 };
 
 const inputCustomStyle = {
+  width: "300px",
+  height: "60px",
   padding: "8px",
-  fontSize: "14px",
+  fontSize: "45px",
   margin: "5px",
   border: "dotted 3px",
   borderColor: "blue",
   borderRadius: "none",
   ":hover": {
-    borderColor: "orange"
-  }
+    borderColor: "orange",
+  },
 };
 const selectCustomStyle = {
   root: {
@@ -38,15 +40,15 @@ const selectCustomStyle = {
     borderColor: "blue",
     width: "300px",
     ":hover": { borderColor: "green", borderWidth: "3px" },
-    ":focus": { borderColor: "black", borderWidth: "3px" }
+    ":focus": { borderColor: "black", borderWidth: "3px" },
   },
   selectedOptionItem: { color: "red" },
   selectedOptionsPills: {
-    backgroundColor: "#a3e4be"
+    backgroundColor: "#a3e4be",
   },
   placeholder: {
-    color: "#c934ce"
-  }
+    color: "#c934ce",
+  },
 };
 
 const autocomleteCustomStyle = {
@@ -58,9 +60,9 @@ const autocomleteCustomStyle = {
     borderWidth: " 3px",
     borderRadius: "none",
     ":hover": {
-      borderColor: "red"
-    }
-  }
+      borderColor: "red",
+    },
+  },
 };
 
 const optionsSelect = [
@@ -70,7 +72,7 @@ const optionsSelect = [
   { label: "culebra" },
   { label: "pez" },
   { label: "tigre" },
-  { label: "aguila" }
+  { label: "aguila" },
 ];
 
 const autocomplete = [
@@ -81,7 +83,7 @@ const autocomplete = [
   "pez",
   "tigre",
   "aguila",
-  "arroz"
+  "arroz",
   // "agua",
   // "alcohol",
   // "aprinchi"
@@ -95,7 +97,7 @@ export default class App extends Component {
           <h2>Botones</h2>
           <ThemeProvider theme={buttonCustomStyle}>
             <Button
-              onClick={() => console.log("oprimiste esta mierda")}
+              onClick={() => console.log("clicked")}
               color="danger"
             >
               Custom Button
@@ -130,8 +132,7 @@ export default class App extends Component {
             ></InputNumber>
           </ThemeProvider>
           <InputNumber
-            placeholder="Number Input"
-            variant="outlined"
+
           ></InputNumber>
         </div>
         <div>

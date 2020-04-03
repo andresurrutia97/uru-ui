@@ -82,7 +82,7 @@ class Input extends React.Component {
           ...baseInput,
           ...customTheme
         };
-      //Case para variante por default
+      //Default
       default:
         let variantDefault = {
           border: "none",

@@ -1,4 +1,4 @@
-# uru-ui
+# Uru-UI
 
 > Libreria de componentes UI para React
 
@@ -13,16 +13,15 @@ npm install --save uru-ui
 ## Usage
 
 ```jsx
-import React, { Component } from 'react'
+import { Button, InputNumber } from "uru-ui";
 
-import MyComponent from 'uru-ui'
-
-class Example extends Component {
-  render () {
-    return (
-      <MyComponent />
-    )
-  }
+const App = () => {
+  return(
+    <>
+      <Button color="primary">Primary Button</Button>
+      <InputNumber/>
+    <>
+  )
 }
 ```
 

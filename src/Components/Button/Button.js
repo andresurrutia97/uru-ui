@@ -17,7 +17,7 @@ const Button = props => {
     //Verifica si hay estilos Custom y crea variables
     var customTheme = theme;
     if (theme) {
-      //Se crea variable especifica para los Selectores (para no sobreescribir los estilos Default)
+      //Se crea variable especifica para los Selectores (para no sobreescribir los estilos default)
       var customThemeHover = theme[":hover"];
     }
     //Estilos base del botón
@@ -31,14 +31,14 @@ const Button = props => {
       cursor: "pointer"
     };
 
-    //Estilos base del botón con variante "Filled"
+    //Estilos base del botón con variante "filled"
     const baseButtonFilled = {
       boxShadow: "0 2px 5px rgba(0, 0, 0, 0.2)",
       border: "none",
       color: "white"
     };
 
-    //Estilos base del botón con variante "Outlined"
+    //Estilos base del botón con variante "outlined"
     const baseButtonOutlined = {
       border: "solid 1px",
       backgroundColor: "white"

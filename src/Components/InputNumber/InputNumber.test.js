@@ -76,7 +76,7 @@ describe("<InputNumber/>", () => {
     ).toEqual("#e9e9e9");
   });
 
-  it("Debe retornar modificar los estilos del compoenente <Input/> dentro del <InputNumber/> de acuerdo a los estilos del theme", () => {
+  it("Debe modificar los estilos del componente <Input/> dentro del <InputNumber/> de acuerdo a los estilos del theme", () => {
     const inputWrapper = mount(
       <ThemeProvider theme={inputNumberCustomStyle}>
         <InputNumber variant="outlined"></InputNumber>

@@ -18,27 +18,27 @@ class Select extends React.Component {
       //Opciones de selección
       options: [],
       //Opciones seleccionadas
-      selectedOptions: []
+      selectedOptions: [],
     };
   }
 
   componentDidMount() {
     const options = [];
     /* Recibe las opciones y crea un nuevo arreglo con un id en cada item de 
-    acuerdo al index del arreglo y lo adigna al variable "options" del estado */
+    acuerdo al index del arreglo y lo asigna a la variable de esatado "options" */
     this.props.options.map((el, index) => {
       options.push({ label: el.label, id: index, selected: false });
     });
     this.setState({ options: options });
   }
 
-  /* Función que asigna un flag booleano a cada item del arreglo para verificar si 
-  ha sido seleccionado o no, creando un nuevo arreglo de opciones seleccionadas */
+  /* Función que modifica el flag "selected" de cada item del arreglo para verificar si 
+  ha sido seleccionado o no */
   optionSelectedHandler = (id, selected) => {
     let options = [...this.state.options];
     //verifica si la selección es única
     if (!this.props.multi) {
-      options.map(option => {
+      options.map((option) => {
         option.selected = false;
       });
     }
@@ -48,9 +48,9 @@ class Select extends React.Component {
 
   /* Función modifica el flag booleano de cada item del arreglo para 
   deseleccionar el item */
-  removeSelectionHandler = id => {
+  removeSelectionHandler = (id) => {
     let selectedOptions = [...this.state.selectedOptions];
-    selectedOptions.map(option => {
+    selectedOptions.map((option) => {
       if (option.id === id) {
         option.selected = false;
       }
@@ -72,8 +72,8 @@ class Select extends React.Component {
   // Verifica si hay props de color. En caso de no haber, asigna uno por default
   color = this.props.color ? colors[this.props.color] : colors.primary;
 
-  //Función que retorna los estilos delz| componente
-  styles = theme => {
+  //Función que retorna los estilos del componente
+  styles = (theme) => {
     //Verifica si hay estilos Custom y crea variables de acuerdo al componente modificado
     if (theme) {
       var rootCustomStyle = theme.root;
@@ -111,13 +111,13 @@ class Select extends React.Component {
         ":hover": {
           borderWidth: "2px",
           borderColor: this.color,
-          ...rootCustomStyleHover
+          ...rootCustomStyleHover,
         },
         ":focus": {
           borderWidth: "2px",
           borderColor: this.color,
-          ...rootCustomStyleFocus
-        }
+          ...rootCustomStyleFocus,
+        },
       },
       optionsList: {
         maxHeight: "150px",
@@ -132,18 +132,18 @@ class Select extends React.Component {
         boxShadow: "0px 2px 3px rgba(0, 0, 0, 0.2)",
         marginTop: "5px",
         padding: "5px 0 5px 0",
-        ...optionListCustomStyle
+        ...optionListCustomStyle,
       },
       optionItem: {
         display: "block",
         fontSize: "16px",
         cursor: "default",
         padding: "5px 20px",
-        ...optionItemCustomStyle
+        ...optionItemCustomStyle,
       },
       selectedOptionItem: {
         color: this.color,
-        ...selectedOptionItemCustomStyle
+        ...selectedOptionItemCustomStyle,
       },
       selectedOptions: {
         minHeight: "30px",
@@ -151,7 +151,7 @@ class Select extends React.Component {
         alignItems: "center",
         width: "100%",
         padding: "5px 5px",
-        ...selectedOptionsCustomStyle
+        ...selectedOptionsCustomStyle,
       },
       icon: {
         right: "0",
@@ -160,11 +160,11 @@ class Select extends React.Component {
         fill: colors.darkGray,
         display: "flex",
         alignItems: "center",
-        ...iconCustomStyle
+        ...iconCustomStyle,
       },
       selectedOptionsPillsList: {
         width: "100%",
-        ...selectedOptionsPillsListCustomStyle
+        ...selectedOptionsPillsListCustomStyle,
       },
       selectedOptionsPills: {
         fontSize: "14px",
@@ -179,21 +179,21 @@ class Select extends React.Component {
           cursor: "pointer",
           marginLeft: "7px",
           verticalAlign: "middle",
-          ...selectedOptionsPillsAfterCustomStyle
-        }
+          ...selectedOptionsPillsAfterCustomStyle,
+        },
       },
       placeholder: {
         color: "#8e8e8e",
         marginLeft: "10px",
-        ...placeholderCustomStyle
-      }
+        ...placeholderCustomStyle,
+      },
     };
   };
 
   render() {
     return (
       <ThemeContext.Consumer>
-        {theme => (
+        {(theme) => (
           <div
             css={this.styles(theme).root}
             onBlur={this.closeDropDownHandler}
@@ -202,7 +202,7 @@ class Select extends React.Component {
             <div
               css={this.styles(theme).selectedOptions}
               onClick={() => {
-                this.setState(prevState => {
+                this.setState((prevState) => {
                   return { dropDownOpen: !prevState.dropDownOpen };
                 });
               }}
@@ -237,7 +237,7 @@ Select.propTypes = {
   options: PropTypes.array,
   multi: PropTypes.bool,
   color: PropTypes.string,
-  placeholder: PropTypes.string
+  placeholder: PropTypes.string,
 };
 
 export default Select;

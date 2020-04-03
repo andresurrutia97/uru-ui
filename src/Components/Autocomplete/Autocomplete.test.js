@@ -38,7 +38,7 @@ describe("<Autocomplete/>", () => {
     expect(autocomplete).not.toBeNull();
   });
 
-  it("Debe cambiar el estado del showDropdown a true al escribir algo y actualizar el estdo de inputText por lo que se escriba en el input ", () => {
+  it("Debe cambiar el estado del showDropdown a true al escribir algo y actualizar el esatdo de inputText por lo que se escriba en el input ", () => {
     aux.simulate("change", {
       target: { value: "ti" }
     });
