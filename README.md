@@ -29,7 +29,7 @@ npm install --save uru-ui
 ```jsx
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Button from '@material-ui/core/Button';
+import { Button, InputNumber } from "uru-ui";
 
 function App() {
   return (
