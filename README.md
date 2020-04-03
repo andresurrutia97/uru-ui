@@ -30,7 +30,7 @@ import { Button, InputNumber } from "uru-ui";
 const App = () => {
   return(
     <>
-      <Button color="primary">Primary Button</Button>
+      <Button color="primary">Click Me</Button>
       <InputNumber/>
     <>
   )
