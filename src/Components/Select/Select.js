@@ -23,12 +23,16 @@ class Select extends React.Component {
   }
 
   componentDidMount() {
-    const options = [];
+    let options = [];
     /* Recibe las opciones y crea un nuevo arreglo con un id en cada item de 
     acuerdo al index del arreglo y lo asigna a la variable de esatado "options" */
-    this.props.options.map((el, index) => {
-      options.push({ label: el.label, id: index, selected: false });
-    });
+
+    if (this.props.options) {
+      this.props.options.map((el, index) => {
+        options.push({ label: el.label, id: index, selected: false });
+      });
+    }
+
     this.setState({ options: options });
   }
 
@@ -43,6 +47,11 @@ class Select extends React.Component {
       });
     }
     options[id].selected = selected;
+
+    if (typeof this.props.onChange === "function") {
+      this.props.onChange(this.returnSelectedValues(options));
+    }
+
     this.setState({ selectedOptions: options });
   };
 
@@ -56,7 +65,23 @@ class Select extends React.Component {
       }
     });
 
+    if (typeof this.props.onChange === "function") {
+      this.props.onChange(this.returnSelectedValues(selectedOptions));
+    }
+
     this.setState({ selectedOptions: selectedOptions, dropDownOpen: true });
+  };
+
+  //Función para devolver solo los valores seleccionados al usuario
+  returnSelectedValues = (options) => {
+    let selectedOps = [];
+
+    for (let i in options) {
+      if (options[i].selected) {
+        selectedOps.push(this.props.options[i]);
+      }
+    }
+    return selectedOps;
   };
 
   // Función que se encarga de cerrar el dropDown
@@ -97,11 +122,12 @@ class Select extends React.Component {
     }
     return {
       root: {
+        fontFamily: "Montserrat",
         boxSizing: "border-box",
         display: "inline-block",
         margin: "5px",
         position: "relative",
-        backgroundColor: "white",
+        backgroundColor: "transparent",
         width: "400px",
         outline: "none",
         border: "solid 1px",
@@ -149,13 +175,12 @@ class Select extends React.Component {
         minHeight: "30px",
         display: "flex",
         alignItems: "center",
-        width: "100%",
+        justifyContent: "space-between",
         padding: "5px 5px",
         ...selectedOptionsCustomStyle,
       },
       icon: {
         right: "0",
-        marginRight: "10px",
         cursor: "pointer",
         fill: colors.darkGray,
         display: "flex",
@@ -207,13 +232,16 @@ class Select extends React.Component {
                 });
               }}
             >
-              <SelectedItemList
-                items={this.state.selectedOptions}
-                deselectItem={this.removeSelectionHandler}
-                placeholder={this.props.placeholder}
-                //estilos
-                styles={this.styles(theme)}
-              />
+              <div style={{ display: "block" }}>
+                <SelectedItemList
+                  items={this.state.selectedOptions}
+                  deselectItem={this.removeSelectionHandler}
+                  placeholder={this.props.placeholder}
+                  //estilos
+                  styles={this.styles(theme)}
+                />
+              </div>
+
               <div css={this.styles(theme).icon}>
                 {!this.state.dropDownOpen ? arrowDown : arrowUp}
               </div>

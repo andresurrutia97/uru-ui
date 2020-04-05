@@ -26,10 +26,13 @@ class Autocomplete extends Component {
 
     /*Filtra las opciones que hacen match con los caracteres que ingresa 
     el usuario y el de las opciones y crea un arreglo con estas opciones */
-    const suggestions = options.filter(
-      (suggestion) =>
-        suggestion.toLowerCase().indexOf(inputText.toLowerCase()) > -1
-    );
+    let suggestions = [];
+    if (this.props.options) {
+      suggestions = options.filter(
+        (suggestion) =>
+          suggestion.toLowerCase().indexOf(inputText.toLowerCase()) > -1
+      );
+    }
 
     this.setState({
       suggestions,
@@ -40,11 +43,24 @@ class Autocomplete extends Component {
 
   //Selecciona la variable que el usuario da click
   selectItemHandler = (event) => {
+    console.log(this.returnSelectedValues(event));
     this.setState({
       suggestions: [],
       showDropdown: false,
       inputText: event,
     });
+  };
+
+  //Función para devolver solo los valores seleccionados al usuario
+  returnSelectedValues = (value) => {
+    let selectedOps = [];
+
+    for (let i in this.props.options) {
+      if (value === this.props.options[i]) {
+        selectedOps.push(this.props.options[i]);
+      }
+    }
+    return selectedOps;
   };
 
   // Función que se encarga de cerrar el dropDown
@@ -129,7 +145,11 @@ class Autocomplete extends Component {
         ));
       } else {
         return (suggestionsListComponent = (
-          <ul css={this.styles(theme).optionsList}>
+          <ul
+            css={this.styles(theme).optionsList}
+            onBlur={this.closeDropDownHandler}
+            tabIndex="0"
+          >
             <span>No hay sugerencias</span>
           </ul>
         ));
