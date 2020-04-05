@@ -7,7 +7,7 @@ import { colors } from "../Colors/Colors";
 
 class Input extends React.Component {
   //Función que retorna los estilos del componente
-  styles = theme => {
+  styles = (theme) => {
     //Verifica si hay props de color. En caso de no haber, asigna el default
     let colorInput = this.props.color
       ? colors[this.props.color]
@@ -23,11 +23,12 @@ class Input extends React.Component {
 
     //Estilos base del Input
     const baseInput = {
+      fontFamily: "Montserrat",
       boxSizing: "border-box",
       padding: "10px 15px",
       fontSize: "16px",
       margin: "5px",
-      outline: "none"
+      outline: "none",
     };
 
     //Switch case para asignar estilos dependiendo de la variante
@@ -40,22 +41,23 @@ class Input extends React.Component {
           borderBottom: "solid 1px",
           borderRadius: "5px 5px 0 0",
           borderColor: colorInput,
-          transition: "border-width 0.05s",
           ":hover": {
             borderBottom: "solid 2px",
             borderColor: colorInput,
-            ...customThemeHover
+            padding: "10px 15px 9px",
+            ...customThemeHover,
           },
           ":focus": {
             borderBottom: "solid 2px",
             borderColor: colorInput,
-            ...customThemeFocus
-          }
+            padding: "10px 15px 9px",
+            ...customThemeFocus,
+          },
         };
         return {
           ...variantFilled,
           ...baseInput,
-          ...customTheme
+          ...customTheme,
         };
       //Case para variante "outlined"
       case "outlined":
@@ -65,22 +67,23 @@ class Input extends React.Component {
           border: "solid 1px",
           borderRadius: "5px",
           borderColor: colorInput,
-          transition: "border-width 0.05s",
           ":hover": {
             border: "solid 2px",
             borderColor: colorInput,
-            ...customThemeHover
+            padding: "9px 14px",
+            ...customThemeHover,
           },
           ":focus": {
             border: "solid 2px",
             borderColor: colorInput,
-            ...customThemeFocus
-          }
+            padding: "9px 14px",
+            ...customThemeFocus,
+          },
         };
         return {
           ...varianOutlined,
           ...baseInput,
-          ...customTheme
+          ...customTheme,
         };
       //Default
       default:
@@ -90,22 +93,23 @@ class Input extends React.Component {
           borderBottom: "solid 1px",
           borderRadius: "5px 5px 0 0",
           borderColor: colorInput,
-          transition: "border-width 0.05s",
           ":hover": {
             borderBottom: "solid 2px",
             borderColor: colorInput,
-            ...customThemeHover
+            padding: "10px 15px 9px",
+            ...customThemeHover,
           },
           ":focus": {
             borderBottom: "solid 2px",
             borderColor: colorInput,
-            ...customThemeFocus
-          }
+            padding: "10px 15px 9px",
+            ...customThemeFocus,
+          },
         };
         return {
           ...variantDefault,
           ...baseInput,
-          ...customTheme
+          ...customTheme,
         };
     }
   };
@@ -113,7 +117,7 @@ class Input extends React.Component {
   render() {
     return (
       <ThemeContext.Consumer>
-        {theme => (
+        {(theme) => (
           <input
             {...this.props}
             placeholder={this.props.placeholder}
@@ -130,7 +134,7 @@ Input.propTypes = {
   variant: PropTypes.string,
   colors: PropTypes.string,
   value: PropTypes.string,
-  placeholder: PropTypes.string
+  placeholder: PropTypes.string,
 };
 
 export default Input;
