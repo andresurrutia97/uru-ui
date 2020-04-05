@@ -22,9 +22,9 @@ const buttonCustomStyle = {
 
 const inputCustomStyle = {
   width: "300px",
-  height: "60px",
+  height: "40px",
   padding: "8px",
-  fontSize: "45px",
+  fontSize: "18px",
   margin: "5px",
   border: "dotted 3px",
   borderColor: "blue",
@@ -83,29 +83,37 @@ const autocomplete = [
   "pez",
   "tigre",
   "aguila",
-  "arroz"
+  "arroz",
 ];
 
 export default class App extends Component {
+  aux = (value) => {
+    console.log(value);
+  };
   render() {
     return (
       <React.Fragment>
         <div>
           <h2>Botones</h2>
           <ThemeProvider theme={buttonCustomStyle}>
-            <Button
-              onClick={() => console.log("clicked")}
-              color="danger"
-            >
+            <Button onClick={() => console.log("clicked")} color="danger">
               Custom Button
             </Button>
           </ThemeProvider>
           <Button color="primary">Primary Button</Button>
+          <Button color="success">Primary Button</Button>
+          <Button>Primary Button</Button>
           <Button color="danger">Danger Button</Button>
           <Button variant="outlined" color="success">
             Success outlined Button
           </Button>
           <Button variant="outlined">Default outlined Button</Button>
+          <Button color="primary" variant="outlined">
+            Default outlined Button
+          </Button>
+          <Button color="danger" variant="outlined">
+            Default outlined Button
+          </Button>
         </div>
         <div>
           <h2>Inputs</h2>
@@ -128,20 +136,18 @@ export default class App extends Component {
               variant="outlined"
             ></InputNumber>
           </ThemeProvider>
-          <InputNumber
-
-          ></InputNumber>
+          <InputNumber></InputNumber>
         </div>
         <div>
           <h2>Multiple select</h2>
           <ThemeProvider theme={selectCustomStyle}>
             <Select
               options={optionsSelect}
-              multi
               placeholder="Custom select..."
+              onChange={this.aux}
             ></Select>
           </ThemeProvider>
-          <Select options={optionsSelect} multi></Select>
+          <Select options={optionsSelect} multi onChange={this.aux}></Select>
         </div>
         <div>
           <h2>Autocomplete</h2>
@@ -153,7 +159,6 @@ export default class App extends Component {
             ></Autocomplete>
           </ThemeProvider>
           <Autocomplete
-            options={autocomplete}
             placeholder="Type something..."
           ></Autocomplete>
         </div>
