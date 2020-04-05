@@ -5,9 +5,9 @@ import PropTypes from "prop-types";
 import { ThemeContext } from "../ThemeProvider/ThemeProvider";
 import { colors } from "../Colors/Colors";
 
-const Button = props => {
+const Button = (props) => {
   //Función que retorna los estilos del componente
-  const styles = theme => {
+  const styles = (theme) => {
     //verifica si la variante outlined esta activada
     let outlined = false;
     if (props.variant === "outlined") {
@@ -22,26 +22,27 @@ const Button = props => {
     }
     //Estilos base del botón
     const baseButton = {
+      fontFamily: "Montserrat",
       boxSizing: "border-box",
       padding: "10px 20px",
       fontSize: "16px",
       borderRadius: "8px",
       margin: "5px",
       outline: "none",
-      cursor: "pointer"
+      cursor: "pointer",
     };
 
     //Estilos base del botón con variante "filled"
     const baseButtonFilled = {
       boxShadow: "0 2px 5px rgba(0, 0, 0, 0.2)",
       border: "none",
-      color: "white"
+      color: "white",
     };
 
     //Estilos base del botón con variante "outlined"
     const baseButtonOutlined = {
       border: "solid 1px",
-      backgroundColor: "white"
+      backgroundColor: "transparent",
     };
 
     //Switch case para asignar estilos dependiendo del color y la variante
@@ -56,22 +57,22 @@ const Button = props => {
               ...baseButtonOutlined,
               ":hover": {
                 borderColor: colors.primaryDark,
-                color: colors.primaryDark,
-                ...customThemeHover
-              }
+                backgroundColor: colors.outlinedPrimary,
+                ...customThemeHover,
+              },
             })
           : (variantPrimary = {
               backgroundColor: colors.primary,
               ...baseButtonFilled,
               ":hover": {
                 backgroundColor: colors.primaryDark,
-                ...customThemeHover
-              }
+                ...customThemeHover,
+              },
             });
         return {
           ...variantPrimary,
           ...baseButton,
-          ...customTheme
+          ...customTheme,
         };
       //Case para color "danger"
       case "danger":
@@ -83,22 +84,22 @@ const Button = props => {
               ...baseButtonOutlined,
               ":hover": {
                 borderColor: colors.dangerDark,
-                color: colors.dangerDark,
-                ...customThemeHover
-              }
+                backgroundColor: colors.outlinedDanger,
+                ...customThemeHover,
+              },
             })
           : (variantDanger = {
               backgroundColor: colors.danger,
               ...baseButtonFilled,
               ":hover": {
                 backgroundColor: colors.dangerDark,
-                ...customThemeHover
-              }
+                ...customThemeHover,
+              },
             });
         return {
           ...variantDanger,
           ...baseButton,
-          ...customTheme
+          ...customTheme,
         };
       //Case para color "success"
       case "success":
@@ -110,56 +111,57 @@ const Button = props => {
               ...baseButtonOutlined,
               ":hover": {
                 borderColor: colors.successDark,
-                color: colors.successDark,
-                ...customThemeHover
-              }
+                backgroundColor: colors.outlinedSuccess,
+                ...customThemeHover,
+              },
             })
           : (variantSuccess = {
               backgroundColor: colors.success,
               ...baseButtonFilled,
               ":hover": {
                 backgroundColor: colors.successDark,
-                ...customThemeHover
-              }
+                ...customThemeHover,
+              },
             });
         return {
           ...variantSuccess,
           ...baseButton,
-          ...customTheme
+          ...customTheme,
         };
       //Default
       default:
         let variantDefault = {};
         outlined
           ? (variantDefault = {
-              borderColor: colors.default,
-              color: colors.default,
               ...baseButtonOutlined,
+              borderColor: colors.default,
+              color: colors.black,
               ":hover": {
                 borderColor: colors.defaultDark,
-                color: colors.defaultDark,
-                ...customThemeHover
-              }
+                backgroundColor: colors.outlinedDefault,
+                ...customThemeHover,
+              },
             })
           : (variantDefault = {
               backgroundColor: colors.default,
               ...baseButtonFilled,
+              color: colors.black,
               ":hover": {
                 backgroundColor: colors.defaultDark,
-                ...customThemeHover
-              }
+                ...customThemeHover,
+              },
             });
         return {
           ...variantDefault,
           ...baseButton,
-          ...customTheme
+          ...customTheme,
         };
     }
   };
 
   return (
     <ThemeContext.Consumer>
-      {theme => (
+      {(theme) => (
         <button {...props} css={styles(theme)}>
           {props.children}
         </button>
@@ -170,7 +172,7 @@ const Button = props => {
 
 Button.propTypes = {
   variant: PropTypes.string,
-  colors: PropTypes.string
+  colors: PropTypes.string,
 };
 
 export default Button;
