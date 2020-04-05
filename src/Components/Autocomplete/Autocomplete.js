@@ -43,7 +43,9 @@ class Autocomplete extends Component {
 
   //Selecciona la variable que el usuario da click
   selectItemHandler = (event) => {
-    console.log(this.returnSelectedValues(event));
+    if (typeof this.props.onChange === "function") {
+      this.props.onChange(this.returnSelectedValues(event));
+    }
     this.setState({
       suggestions: [],
       showDropdown: false,

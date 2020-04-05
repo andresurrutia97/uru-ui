@@ -73,6 +73,7 @@ const optionsSelect = [
   { label: "pez" },
   { label: "tigre" },
   { label: "aguila" },
+  { label: "arroz" },
 ];
 
 const autocomplete = [
@@ -84,6 +85,7 @@ const autocomplete = [
   "tigre",
   "aguila",
   "arroz",
+  "a34rroz"
 ];
 
 export default class App extends Component {
@@ -156,11 +158,10 @@ export default class App extends Component {
               variant="outlined"
               options={autocomplete}
               placeholder="Type something..."
+              onChange={this.aux}
             ></Autocomplete>
           </ThemeProvider>
-          <Autocomplete
-            placeholder="Type something..."
-          ></Autocomplete>
+          <Autocomplete placeholder="Type something..."></Autocomplete>
         </div>
       </React.Fragment>
     );
