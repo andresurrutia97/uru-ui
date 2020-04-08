@@ -11,8 +11,8 @@ export const colors = {
   darkGray: "#adadad",
   black: "#3b3b3b",
 
-  outlinedPrimary: "#f9feff",
-  outlinedDanger: "#fff7f7",
-  outlinedSuccess: "#fbfffa",
-  outlinedDefault: "#f7f7f7",
+  outlinedPrimary: "#41bedd0e",
+  outlinedDanger: "#f754540e",
+  outlinedSuccess: "#5dce470e",
+  outlinedDefault: "#d4d4d40e",
 };

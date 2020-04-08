@@ -18,7 +18,7 @@ class Select extends React.Component {
       //Opciones de selección
       options: [],
       //Opciones seleccionadas
-      selectedOptions: [],
+      selectedOptions: []
     };
   }
 
@@ -42,7 +42,7 @@ class Select extends React.Component {
     let options = [...this.state.options];
     //verifica si la selección es única
     if (!this.props.multi) {
-      options.map((option) => {
+      options.map(option => {
         option.selected = false;
       });
     }
@@ -57,9 +57,9 @@ class Select extends React.Component {
 
   /* Función modifica el flag booleano de cada item del arreglo para 
   deseleccionar el item */
-  removeSelectionHandler = (id) => {
+  removeSelectionHandler = id => {
     let selectedOptions = [...this.state.selectedOptions];
-    selectedOptions.map((option) => {
+    selectedOptions.map(option => {
       if (option.id === id) {
         option.selected = false;
       }
@@ -73,7 +73,7 @@ class Select extends React.Component {
   };
 
   //Función para devolver solo los valores seleccionados al usuario
-  returnSelectedValues = (options) => {
+  returnSelectedValues = options => {
     let selectedOps = [];
 
     for (let i in options) {
@@ -98,7 +98,7 @@ class Select extends React.Component {
   color = this.props.color ? colors[this.props.color] : colors.primary;
 
   //Función que retorna los estilos del componente
-  styles = (theme) => {
+  styles = theme => {
     //Verifica si hay estilos Custom y crea variables de acuerdo al componente modificado
     if (theme) {
       var rootCustomStyle = theme.root;
@@ -123,27 +123,15 @@ class Select extends React.Component {
     return {
       root: {
         fontFamily: "Montserrat",
+        fontSize: "14px",
         boxSizing: "border-box",
         display: "inline-block",
-        margin: "5px",
         position: "relative",
         backgroundColor: "transparent",
         width: "400px",
         outline: "none",
-        border: "solid 1px",
-        borderColor: colors.darkGray,
-        borderRadius: "4px",
-        ...rootCustomStyle,
-        ":hover": {
-          borderWidth: "2px",
-          borderColor: this.color,
-          ...rootCustomStyleHover,
-        },
-        ":focus": {
-          borderWidth: "2px",
-          borderColor: this.color,
-          ...rootCustomStyleFocus,
-        },
+        margin: "6px",
+        ...rootCustomStyle
       },
       optionsList: {
         maxHeight: "150px",
@@ -158,26 +146,41 @@ class Select extends React.Component {
         boxShadow: "0px 2px 3px rgba(0, 0, 0, 0.2)",
         marginTop: "5px",
         padding: "5px 0 5px 0",
-        ...optionListCustomStyle,
+        ...optionListCustomStyle
       },
       optionItem: {
         display: "block",
-        fontSize: "16px",
+        fontSize: "14px",
         cursor: "default",
         padding: "5px 20px",
-        ...optionItemCustomStyle,
+        ...optionItemCustomStyle
       },
       selectedOptionItem: {
         color: this.color,
-        ...selectedOptionItemCustomStyle,
+        ...selectedOptionItemCustomStyle
       },
       selectedOptions: {
         minHeight: "30px",
         display: "flex",
         alignItems: "center",
         justifyContent: "space-between",
+        border: "solid 1px",
+        borderColor: colors.darkGray,
+        borderRadius: "4px",
         padding: "5px 5px",
-        ...selectedOptionsCustomStyle,
+        ":hover": {
+          borderWidth: "2px",
+          borderColor: this.color,
+          padding: "4px 4px",
+          ...rootCustomStyleHover
+        },
+        ":focus": {
+          borderWidth: "2px",
+          borderColor: this.color,
+          padding: "4px 4px",
+          ...rootCustomStyleFocus
+        },
+        ...selectedOptionsCustomStyle
       },
       icon: {
         right: "0",
@@ -185,11 +188,11 @@ class Select extends React.Component {
         fill: colors.darkGray,
         display: "flex",
         alignItems: "center",
-        ...iconCustomStyle,
+        ...iconCustomStyle
       },
       selectedOptionsPillsList: {
         width: "100%",
-        ...selectedOptionsPillsListCustomStyle,
+        ...selectedOptionsPillsListCustomStyle
       },
       selectedOptionsPills: {
         fontSize: "14px",
@@ -204,21 +207,21 @@ class Select extends React.Component {
           cursor: "pointer",
           marginLeft: "7px",
           verticalAlign: "middle",
-          ...selectedOptionsPillsAfterCustomStyle,
-        },
+          ...selectedOptionsPillsAfterCustomStyle
+        }
       },
       placeholder: {
         color: "#8e8e8e",
         marginLeft: "10px",
-        ...placeholderCustomStyle,
-      },
+        ...placeholderCustomStyle
+      }
     };
   };
 
   render() {
     return (
       <ThemeContext.Consumer>
-        {(theme) => (
+        {theme => (
           <div
             css={this.styles(theme).root}
             onBlur={this.closeDropDownHandler}
@@ -227,7 +230,7 @@ class Select extends React.Component {
             <div
               css={this.styles(theme).selectedOptions}
               onClick={() => {
-                this.setState((prevState) => {
+                this.setState(prevState => {
                   return { dropDownOpen: !prevState.dropDownOpen };
                 });
               }}
@@ -265,7 +268,7 @@ Select.propTypes = {
   options: PropTypes.array,
   multi: PropTypes.bool,
   color: PropTypes.string,
-  placeholder: PropTypes.string,
+  placeholder: PropTypes.string
 };
 
 export default Select;

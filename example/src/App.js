@@ -6,7 +6,7 @@ import {
   Input,
   InputNumber,
   Select,
-  Autocomplete,
+  Autocomplete
 } from "uru-ui";
 
 const buttonCustomStyle = {
@@ -16,8 +16,8 @@ const buttonCustomStyle = {
   border: "solid 2px green",
   borderRadius: "0 5px 0 5px",
   ":hover": {
-    borderColor: "black",
-  },
+    borderColor: "black"
+  }
 };
 
 const inputCustomStyle = {
@@ -30,8 +30,8 @@ const inputCustomStyle = {
   borderColor: "blue",
   borderRadius: "none",
   ":hover": {
-    borderColor: "orange",
-  },
+    borderColor: "orange"
+  }
 };
 const selectCustomStyle = {
   root: {
@@ -40,15 +40,15 @@ const selectCustomStyle = {
     borderColor: "blue",
     width: "300px",
     ":hover": { borderColor: "green", borderWidth: "3px" },
-    ":focus": { borderColor: "black", borderWidth: "3px" },
+    ":focus": { borderColor: "black", borderWidth: "3px" }
   },
   selectedOptionItem: { color: "red" },
   selectedOptionsPills: {
-    backgroundColor: "#a3e4be",
+    backgroundColor: "#a3e4be"
   },
   placeholder: {
-    color: "#c934ce",
-  },
+    color: "#c934ce"
+  }
 };
 
 const autocomleteCustomStyle = {
@@ -60,9 +60,9 @@ const autocomleteCustomStyle = {
     borderWidth: " 3px",
     borderRadius: "none",
     ":hover": {
-      borderColor: "red",
-    },
-  },
+      borderColor: "red"
+    }
+  }
 };
 
 const optionsSelect = [
@@ -73,7 +73,7 @@ const optionsSelect = [
   { label: "pez" },
   { label: "tigre" },
   { label: "aguila" },
-  { label: "arroz" },
+  { label: "arroz" }
 ];
 
 const autocomplete = [
@@ -89,46 +89,35 @@ const autocomplete = [
 ];
 
 export default class App extends Component {
-  aux = (value) => {
+  aux = value => {
     console.log(value);
   };
   render() {
     return (
       <React.Fragment>
-        <div>
-          <h2>Botones</h2>
-          <ThemeProvider theme={buttonCustomStyle}>
-            <Button onClick={() => console.log("clicked")} color="danger">
-              Custom Button
-            </Button>
-          </ThemeProvider>
-          <Button color="primary">Primary Button</Button>
-          <Button color="success">Primary Button</Button>
-          <Button>Primary Button</Button>
-          <Button color="danger">Danger Button</Button>
-          <Button variant="outlined" color="success">
-            Success outlined Button
-          </Button>
-          <Button variant="outlined">Default outlined Button</Button>
-          <Button color="primary" variant="outlined">
-            Default outlined Button
-          </Button>
-          <Button color="danger" variant="outlined">
-            Default outlined Button
-          </Button>
+        <h2>Botones</h2>
+        <div style={{ display: "flex", alignItems: "center" }}>
+          <Button color="danger">Primary Button</Button>
+          <Button variant="outlined">Success outlined Button</Button>
+          {/* <div
+            style={{ height: "200px", width: "200px", backgroundColor: "red" }}
+          ></div> */}
         </div>
         <div>
           <h2>Inputs</h2>
-          <ThemeProvider theme={inputCustomStyle}>
-            <Input variant="outlined" placeholder="custom Input" />
-          </ThemeProvider>
-          <Input
-            color="success"
-            placeholder="filled success"
-            variant="filled"
-          />
-          <Input placeholder="outlined primary" variant="outlined" />
-          <Input color="danger" placeholder="Default danger" />
+          <div style={{ display: "flex", alignItems: "center" }}>
+            <Input color="danger" placeholder="Default danger" />
+            <Input
+              variant="outlined"
+              color="danger"
+              placeholder="Default danger"
+            />
+            <Input
+              variant="filled"
+              color="danger"
+              placeholder="Default danger"
+            />
+          </div>
         </div>
         <div>
           <h2>Number Input</h2>
@@ -138,18 +127,13 @@ export default class App extends Component {
               variant="outlined"
             ></InputNumber>
           </ThemeProvider>
-          <InputNumber></InputNumber>
+          <InputNumber onChange={this.aux} placeholder="Custom number"></InputNumber>
         </div>
         <div>
           <h2>Multiple select</h2>
-          <ThemeProvider theme={selectCustomStyle}>
-            <Select
-              options={optionsSelect}
-              placeholder="Custom select..."
-              onChange={this.aux}
-            ></Select>
-          </ThemeProvider>
-          <Select options={optionsSelect} multi onChange={this.aux}></Select>
+          <div style={{ display: "flex", alignItems: "center" }}>
+            <Select options={optionsSelect} multi onChange={this.aux}></Select>
+          </div>
         </div>
         <div>
           <h2>Autocomplete</h2>
@@ -161,7 +145,7 @@ export default class App extends Component {
               onChange={this.aux}
             ></Autocomplete>
           </ThemeProvider>
-          <Autocomplete placeholder="Type something..."></Autocomplete>
+          <Autocomplete options={autocomplete} placeholder="Type something..."></Autocomplete>
         </div>
       </React.Fragment>
     );

@@ -15,12 +15,12 @@ class Autocomplete extends Component {
       //Flag para abrir o cerrar el dropDown
       showDropdown: false,
       //Texto ingresado por el usuario
-      inputText: "",
+      inputText: ""
     };
   }
 
   //Recibe el input del usuario y devuelve las sugerencias
-  onChange = (event) => {
+  onChange = event => {
     const options = this.props.options;
     const inputText = event.target.value;
 
@@ -29,7 +29,7 @@ class Autocomplete extends Component {
     let suggestions = [];
     if (this.props.options) {
       suggestions = options.filter(
-        (suggestion) =>
+        suggestion =>
           suggestion.toLowerCase().indexOf(inputText.toLowerCase()) > -1
       );
     }
@@ -37,24 +37,24 @@ class Autocomplete extends Component {
     this.setState({
       suggestions,
       showDropdown: true,
-      inputText: event.target.value,
+      inputText: event.target.value
     });
   };
 
   //Selecciona la variable que el usuario da click
-  selectItemHandler = (event) => {
+  selectItemHandler = event => {
     if (typeof this.props.onChange === "function") {
       this.props.onChange(this.returnSelectedValues(event));
     }
     this.setState({
       suggestions: [],
       showDropdown: false,
-      inputText: event,
+      inputText: event
     });
   };
 
   //Función para devolver solo los valores seleccionados al usuario
-  returnSelectedValues = (value) => {
+  returnSelectedValues = value => {
     let selectedOps = [];
 
     for (let i in this.props.options) {
@@ -71,7 +71,7 @@ class Autocomplete extends Component {
   };
 
   //Función que retorna los estilos del componente
-  styles = (theme) => {
+  styles = theme => {
     //Verifica si hay estilos Custom y crea variables
     if (theme) {
       var rootCustomStyle = theme.root;
@@ -83,16 +83,16 @@ class Autocomplete extends Component {
     return {
       root: {
         boxSizing: "border-box",
+        fontSize: "14px",
         display: "inline-block",
         position: "relative",
         width: "350px",
-        margin: "5px",
-        ...rootCustomStyle,
+        ...rootCustomStyle
       },
       input: {
         width: "100%",
         margin: "0",
-        ...inputCustomStyle,
+        ...inputCustomStyle
       },
       optionsList: {
         boxSizing: "border-box",
@@ -108,18 +108,22 @@ class Autocomplete extends Component {
         marginTop: "5px",
         padding: "5px 20px",
         listStyle: "none",
-        ...optionListCustomStyle,
+        ...optionListCustomStyle
       },
       optionItem: {
-        fontSize: "16px",
+        fontFamily: "Montserrat",
         cursor: "default",
         margin: "5px 0",
-        optionItemCustomStyle,
+        optionItemCustomStyle
       },
+      noOptions: {
+        fontFamily: "Montserrat",
+        fontSize: "14px"
+      }
     };
   };
 
-  optionList = (theme) => {
+  optionList = theme => {
     let suggestionsListComponent;
 
     //verifica si el flag del dropdown es true y si el usuario ha digitado algo
@@ -127,12 +131,8 @@ class Autocomplete extends Component {
       //Verifica si hay sugerencias
       if (this.state.suggestions.length) {
         return (suggestionsListComponent = (
-          <ul
-            css={this.styles(theme).optionsList}
-            onBlur={this.closeDropDownHandler}
-            tabIndex="0"
-          >
-            {this.state.suggestions.map((suggestion) => {
+          <ul css={this.styles(theme).optionsList}>
+            {this.state.suggestions.map(suggestion => {
               return (
                 <li
                   key={suggestion}
@@ -147,12 +147,8 @@ class Autocomplete extends Component {
         ));
       } else {
         return (suggestionsListComponent = (
-          <ul
-            css={this.styles(theme).optionsList}
-            onBlur={this.closeDropDownHandler}
-            tabIndex="0"
-          >
-            <span>No hay sugerencias</span>
+          <ul css={this.styles(theme).optionsList}>
+            <span css={this.styles(theme).noOptions}>No hay sugerencias</span>
           </ul>
         ));
       }
@@ -162,12 +158,12 @@ class Autocomplete extends Component {
   render() {
     return (
       <ThemeContext.Consumer>
-        {(theme) => (
+        {theme => (
           <div css={this.styles(theme).root}>
             <ThemeProvider theme={this.styles(theme).input}>
               <Input
                 {...this.props}
-                onChange={(event) => this.onChange(event)}
+                onChange={event => this.onChange(event)}
                 value={this.state.inputText}
               />
               {this.optionList(theme)}
@@ -180,7 +176,7 @@ class Autocomplete extends Component {
 }
 
 Autocomplete.propTypes = {
-  options: PropTypes.array,
+  options: PropTypes.array
 };
 
 export default Autocomplete;

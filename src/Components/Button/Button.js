@@ -24,16 +24,21 @@ const Button = (props) => {
     const baseButton = {
       fontFamily: "Montserrat",
       boxSizing: "border-box",
-      padding: "10px 20px",
-      fontSize: "16px",
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      margin: "6px",
+      minWidth: "65px",
+      fontSize: "14px",
       borderRadius: "8px",
-      margin: "5px",
       outline: "none",
       cursor: "pointer",
+      transition: "background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms"
     };
 
     //Estilos base del botón con variante "filled"
     const baseButtonFilled = {
+      padding: "10px 20px",
       boxShadow: "0 2px 5px rgba(0, 0, 0, 0.2)",
       border: "none",
       color: "white",
@@ -41,6 +46,7 @@ const Button = (props) => {
 
     //Estilos base del botón con variante "outlined"
     const baseButtonOutlined = {
+      padding: "9px 19px",
       border: "solid 1px",
       backgroundColor: "transparent",
     };

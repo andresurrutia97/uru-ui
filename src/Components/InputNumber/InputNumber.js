@@ -16,7 +16,11 @@ class InputNumber extends React.Component {
   onChange = event => {
     //Contiene la informacion ingresada por el usuario
     const input = event.target.value;
-    this.setState({ number: this.formatNumberHandler(input) });
+    const formatedNumber = this.formatNumberHandler(input);
+    if (typeof this.props.onChange === "function") {
+      this.props.onChange(formatedNumber);
+    }
+    this.setState({ number: formatedNumber });
   };
 
   //Función que recibe un numero y lo devuelve formateado

@@ -25,9 +25,8 @@ class Input extends React.Component {
     const baseInput = {
       fontFamily: "Montserrat",
       boxSizing: "border-box",
-      padding: "10px 15px",
-      fontSize: "16px",
-      margin: "5px",
+      margin: "6px",
+      fontSize: "14px",
       outline: "none",
     };
 
@@ -37,6 +36,7 @@ class Input extends React.Component {
       case "filled":
         let variantFilled = {
           border: "none",
+          padding: "10px 15px",
           backgroundColor: colors.gray,
           borderBottom: "solid 1px",
           borderRadius: "5px 5px 0 0",
@@ -63,22 +63,23 @@ class Input extends React.Component {
       case "outlined":
         let varianOutlined = {
           border: "none",
-          backgroundColor: "white",
+          padding: "9.5px 14px",
+          backgroundColor: "transparent",
           border: "solid 1px",
           borderRadius: "5px",
           borderColor: colorInput,
           ":hover": {
             border: "solid 2px",
             borderColor: colorInput,
-            padding: "9px 14px",
-            ...customThemeHover,
+            padding: "8.5px 13px",
+            ...customThemeHover
           },
           ":focus": {
             border: "solid 2px",
             borderColor: colorInput,
-            padding: "9px 14px",
-            ...customThemeFocus,
-          },
+            padding: "8.5px 13px",
+            ...customThemeFocus
+          }
         };
         return {
           ...varianOutlined,
@@ -89,7 +90,8 @@ class Input extends React.Component {
       default:
         let variantDefault = {
           border: "none",
-          backgroundColor: "white",
+          padding: "10px 15px",
+          backgroundColor: "transparent",
           borderBottom: "solid 1px",
           borderRadius: "5px 5px 0 0",
           borderColor: colorInput,
