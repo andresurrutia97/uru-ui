@@ -97,7 +97,10 @@ export default class App extends Component {
       <React.Fragment>
         <h2>Botones</h2>
         <div style={{ display: "flex", alignItems: "center" }}>
+          <Button color="primary">Primary Button</Button>
           <Button color="danger">Primary Button</Button>
+          <Button color="success">Primary Button</Button>
+          <Button >Primary Button</Button>
           <Button variant="outlined">Success outlined Button</Button>
           {/* <div
             style={{ height: "200px", width: "200px", backgroundColor: "red" }}
