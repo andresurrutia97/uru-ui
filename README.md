@@ -47,7 +47,7 @@ Clone locally:
 
 ```bash
 $ git clone https://github.com/andresurrutia97/uru-ui.git
-$ cd uru-io
+$ cd uru-ui
 $ npm install
 $ npm start
 ```
