@@ -50,6 +50,7 @@ $ git clone https://github.com/andresurrutia97/uru-ui.git
 $ cd uru-io
 $ npm install
 $ npm start
+```
 
 ## Documentation
 
