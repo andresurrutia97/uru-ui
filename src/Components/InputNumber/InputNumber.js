@@ -16,7 +16,9 @@ class InputNumber extends React.Component {
   onChange = event => {
     //Contiene la informacion ingresada por el usuario
     const input = event.target.value;
-    const formatedNumber = this.formatNumberHandler(input);
+    //Formatea el número
+    let formatedNumber = this.formatNumberHandler(input);
+    //Retorna la informacion al usuario por medio de la prop onChange
     if (typeof this.props.onChange === "function") {
       this.props.onChange(formatedNumber);
     }
@@ -28,12 +30,16 @@ class InputNumber extends React.Component {
     //Objeto de javaScript que se encarga de dar formato númerico
     var formatter = new Intl.NumberFormat("en-US");
 
-    //Elimina cualquier elemento que no sea un número
-    const onlyNumbers = number.replace(/[^\d-]/g, "");
+    //Elimina todas las letras
+    let onlyNumbers = number.replace(/[^\d-]/g, "");
 
-    //Da formato al número
-    const formated = formatter.format(onlyNumbers);
-    return formated;
+    //Verifica que solo formatee números mayor a cero
+    if (parseFloat(onlyNumbers) > 0) {
+      //Da formato al número
+      onlyNumbers = formatter.format(onlyNumbers);
+    }
+
+    return onlyNumbers;
   };
 
   //Función para agregar estilos al componente
