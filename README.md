@@ -54,7 +54,7 @@ $ npm start
 
 ## Documentation
 
-Revisa la documentación [Uru-Ui documentacíon](https://uruui-demoapp.web.app/).
+Revisa la documentación [Uru-Ui](https://uruui-demoapp.web.app/).
 
 
 ## License
