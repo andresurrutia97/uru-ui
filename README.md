@@ -43,13 +43,17 @@ ReactDOM.render(<App />, document.querySelector("#app"));
 
 ## Development
 
-Clone locally:
-
+Clonar repositorio localmente.
 ```bash
 $ git clone https://github.com/andresurrutia97/uru-ui.git
 $ cd uru-ui
 $ npm install
 $ npm start
+```
+
+### Testing
+```bash
+$ npm run test:watch
 ```
 
 ## Documentation
