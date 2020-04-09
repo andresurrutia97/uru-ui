@@ -18,7 +18,7 @@ describe("<Select/>", () => {
     { label: "culebra" },
     { label: "pez" },
     { label: "tigre" },
-    { label: "aguila" },
+    { label: "aguila" }
   ];
 
   beforeEach(() => {
@@ -30,13 +30,17 @@ describe("<Select/>", () => {
       borderColor: "blue",
       width: "300px",
       ":hover": { borderColor: "green", borderWidth: "3px" },
-      ":focus": { borderColor: "black", borderWidth: "3px" },
-    },
+      ":focus": { borderColor: "black", borderWidth: "3px" }
+    }
   };
 
   //Función para seleccioanr items y simular el click
   const funcAuxSelectItem = (wrapper, index) =>
-    wrapper.find("ul").find("li").at(index).simulate("click");
+    wrapper
+      .find("ul")
+      .find("li")
+      .at(index)
+      .simulate("click");
 
   it("Debe renderizar un componente <Select/>", () => {
     expect(select).not.toBeNull();
@@ -55,7 +59,10 @@ describe("<Select/>", () => {
   it("Debe cambiar el estado del dropdownOpen a true al dar click ", () => {
     const selectWrapper = mount(<Select options={optionsSelect} />);
 
-    selectWrapper.find("div").at(1).simulate("click");
+    selectWrapper
+      .find("div")
+      .at(1)
+      .simulate("click");
 
     expect(selectWrapper.state().dropDownOpen).toBe(true);
   });
@@ -108,6 +115,24 @@ describe("<Select/>", () => {
     expect(selectWrapperSpan).toHaveLength(2);
   });
 
+  it("Debe retornar las opciones seleccionadas a traves de la propiedad onChange", () => {
+    let func = [];
+
+    const selectWrapper = mount(
+      <Select
+        options={optionsSelect}
+        multi
+        onChange={num => {
+          func = num;
+        }}
+      />
+    );
+    funcAuxSelectItem(selectWrapper, 2);
+    funcAuxSelectItem(selectWrapper, 4);
+
+    expect(func).toEqual([{ label: "leon" }, { label: "pez" }]);
+  });
+
   it("Debe retornar en la prop Theme los estilos custom iguales a los descritos en la constante 'selectCustomStyle'", () => {
     const customSelect = mount(
       <ThemeProvider theme={selectCustomStyle}>
@@ -115,12 +140,15 @@ describe("<Select/>", () => {
       </ThemeProvider>
     );
 
-    const wrapperStyle = customSelect.find(Select).children().props().css;
+    const wrapperStyle = customSelect
+      .find(Select)
+      .children()
+      .props().css;
 
     expect(wrapperStyle.borderColor).toBe("blue");
     expect(wrapperStyle[":hover"]).toEqual({
       borderColor: "green",
-      borderWidth: "3px",
+      borderWidth: "3px"
     });
   });
 

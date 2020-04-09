@@ -42,16 +42,31 @@ describe("<InputNumber/>", () => {
     expect(wrapper.find(Input).props().value).toEqual("15,320,156");
   });
 
-  it("Debe retornar un cero en caso de que se escriba alguna letra o no agregar nada si ya hay números ", () => {
+  it("No debe retornar nada en caso de que se escriba alguna letra o no agregar nada si ya hay números ", () => {
     wrapper.simulate("change", {
       target: { value: "asdf" }
     });
-    expect(wrapper.state().number).toEqual("0");
+    expect(wrapper.state().number).toEqual("");
 
     wrapper.simulate("change", {
       target: { value: "1123adf" }
     });
     expect(wrapper.state().number).toEqual("1,123");
+  });
+
+  it("Debe retornar el numero formateado a traves de la propiedad onChange", () => {
+    let func = [];
+    wrapper.setProps({
+      onChange: num => {
+        func = num;
+      }
+    });
+
+    wrapper.simulate("change", {
+      target: { value: "559833" }
+    });
+
+    expect(func).toEqual("559,833");
   });
 
   it("Al pasar el prop variant='filled', debe llegar al compoenente input  y modificarlo el backgroun de 'white' a '#e9e9e9' ", () => {

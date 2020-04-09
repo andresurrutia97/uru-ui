@@ -34,7 +34,7 @@ describe("<Button/>", () => {
   it("Debe retornar un componente <Button/> con estilo css 'backgroundColor' igual a '#f75454' al pasar la prop color:'danger' ", () => {
     button.setProps({ color: "danger" });
 
-    expect(button.props().children().props.css.backgroundColor).toBe("#f75454");
+    expect(button.props().children().props.css.backgroundColor).toBe("#ed1e79");
   });
 
   it("Debe devolver la prop children igual al texto dado al crear el botón ('Test')", () => {

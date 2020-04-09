@@ -38,7 +38,9 @@ describe("<Input/>", () => {
   });
 
   it("Debe retornar un componente <Input/> con la prop backgroundColor diferente a 'white' ", () => {
-    expect(input.props().children().props.css.backgroundColor).toBe("white");
+    expect(input.props().children().props.css.backgroundColor).toBe(
+      "transparent"
+    );
 
     input.setProps({ variant: "filled" });
     expect(input.props().children().props.css.backgroundColor).not.toBe(

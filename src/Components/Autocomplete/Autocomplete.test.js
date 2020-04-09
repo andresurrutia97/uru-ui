@@ -71,6 +71,27 @@ describe("<Autocomplete/>", () => {
     expect(autocomplete.state().inputText).toBe("arroz");
   });
 
+  it("Debe retornar la opcion a traves de la propiedad onChange", () => {
+    let func = [];
+    autocomplete.setProps({
+      onChange: num => {
+        func = num;
+      }
+    });
+
+    aux.simulate("change", {
+      target: { value: "a" }
+    });
+
+    autocomplete
+      .find("ul")
+      .find("li")
+      .at(3)
+      .simulate("click");
+
+    expect(func).toEqual(["arroz"]);
+  });
+
   it("Al pasar el prop variant='filled', debe llegar al componente input  y modificar el background de 'white' a '#e9e9e9' ", () => {
     autocomplete.setProps({ variant: "filled" });
 
